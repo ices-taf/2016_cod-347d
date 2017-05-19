@@ -1,29 +1,33 @@
+## Download and preprocess data, write TAF input tables
+
+## Before: stockobject.Rdata (ftp)
+## After:  latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
+##         survey_uk.csv, survey_fr.csv (db)
+
 require(icesTAF, quietly=TRUE)
 suppressMessages(require(mgcv, quietly=TRUE))
 source("utilities.R") # require(stockassessment)
 
-ftp.remote <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
-ftp.local <- "../../../ftp/wgnssk/2016/cod-347d/"
+ftp <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
 
 dir.create("db", showWarnings=FALSE)
-dir.create(paste0(ftp.local,"input"), showWarnings=FALSE, recursive=TRUE)
 
 ## Get data
 setwd("db")
-catch.no <- read.ices(paste0(ftp.remote, "data/cn.dat"))
-catch.no <- read.ices(paste0(ftp.remote, "data/cn.dat"))
-catch.mean.weight <- read.ices(paste0(ftp.remote, "data/cw.dat"))
-dis.mean.weight <- read.ices(paste0(ftp.remote, "data/dw.dat"))
-land.mean.weight <- read.ices(paste0(ftp.remote, "data/lw.dat"))
-stock.mean.weight <- read.ices(paste0(ftp.remote, "data/sw.dat"))
-prop.mature <- read.ices(paste0(ftp.remote, "data/mo_raw.dat"))
-natural.mortality <- read.ices(paste0(ftp.remote, "data/nm.dat"))
-surveys <- read.surveys(paste0(ftp.remote, "data/survey.dat"))
-land.no <- read.ices(paste0(ftp.remote, "data/lf.dat"))
+catch.no <- read.ices(paste0(ftp, "data/cn.dat"))
+catch.no <- read.ices(paste0(ftp, "data/cn.dat"))
+catch.mean.weight <- read.ices(paste0(ftp, "data/cw.dat"))
+dis.mean.weight <- read.ices(paste0(ftp, "data/dw.dat"))
+land.mean.weight <- read.ices(paste0(ftp, "data/lw.dat"))
+stock.mean.weight <- read.ices(paste0(ftp, "data/sw.dat"))
+prop.mature <- read.ices(paste0(ftp, "data/mo_raw.dat"))
+natural.mortality <- read.ices(paste0(ftp, "data/nm.dat"))
+surveys <- read.surveys(paste0(ftp, "data/survey.dat"))
+land.no <- read.ices(paste0(ftp, "data/lf.dat"))
 dis.no <- catch.no - land.no
-prop.f <- read.ices(paste0(ftp.remote, "data/pf.dat"))
-prop.m <- read.ices(paste0(ftp.remote, "data/pm.dat"))
-download.file(paste0(ftp.remote,"data/mo_raw.dat"), "mo_raw.dat", quiet=TRUE)
+prop.f <- read.ices(paste0(ftp, "data/pf.dat"))
+prop.m <- read.ices(paste0(ftp, "data/pm.dat"))
+download.file(paste0(ftp,"data/mo_raw.dat"), "mo_raw.dat", quiet=TRUE)
 
 ## Smooth maturity
 skipYears <- c(1:10, 54)
@@ -88,20 +92,20 @@ natmort <- xtab2taf(natural.mortality)
 ibts_1 <- xtab2taf(surveys[[1]])
 ibts_3 <- xtab2taf(surveys[[2]])
 
-## Write tables to local FTP directory
-write.taf(latage, paste0(ftp.local,"input/latage.csv")) # 2a
-write.taf(datage, paste0(ftp.local,"input/datage.csv")) # 2b
-write.taf(catage, paste0(ftp.local,"input/catage.csv")) # 2c
-write.taf(wlandings, paste0(ftp.local,"input/wlandings.csv")) # 3a
-write.taf(wdiscards, paste0(ftp.local,"input/wdiscards.csv")) # 3b
-write.taf(wcatch, paste0(ftp.local,"input/wcatch.csv"))       # 3c
-write.taf(maturity, paste0(ftp.local,"input/maturity.csv")) # 5a
-write.taf(natmort, paste0(ftp.local,"input/natmort.csv"))   # 5b
-write.taf(ibts_1, paste0(ftp.local,"input/ibts_1.csv"))   # 6a
-write.taf(ibts_3, paste0(ftp.local,"input/ibts_3.csv"))   # 6b
+## Write TAF tables to db directory
+write.taf(latage, "db/latage.csv") # 2a
+write.taf(datage, "db/datage.csv") # 2b
+write.taf(catage, "db/catage.csv") # 2c
+write.taf(wlandings, "db/wlandings.csv") # 3a
+write.taf(wdiscards, "db/wdiscards.csv") # 3b
+write.taf(wcatch, "db/wcatch.csv")       # 3c
+write.taf(maturity, "db/maturity.csv") # 5a
+write.taf(natmort, "db/natmort.csv")   # 5b
+write.taf(ibts_1, "db/ibts_1.csv") # 6a
+write.taf(ibts_3, "db/ibts_3.csv") # 6b
 
 ## Save objects required by input.R
 save(surveys, catch.no, prop.mature,
      stock.mean.weight, catch.mean.weight, dis.mean.weight, land.mean.weight,
      prop.f, prop.m, natural.mortality, land.frac,
-     file="db/input.RData")
+     file="db/data.RData")

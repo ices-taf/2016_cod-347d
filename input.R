@@ -1,8 +1,9 @@
+require(icesTAF, quietly=TRUE)
 source("utilities.R") # require(stockassessment)
 
 dir.create("input", showWarnings=FALSE)
 
-load("db/input.RData")
+load("db/data.RData")
 
 ## Write the file with data prepared for state-space assessment
 data<-write.records(surveys=surveys,
