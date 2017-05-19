@@ -3,15 +3,15 @@
 # Anders Nielsen <anders@nielsensweb.org> Jul. 2012
 
 
-readLines<-function (con = stdin(), n = -1L, ok = TRUE, warn = FALSE, encoding = "unknown") 
-{
-    # Small change in realLines defaults  
-    if (is.character(con)) {
-        con <- file(con, "r")
-        on.exit(close(con))
-    }
-    .Internal(readLines(con, n, ok, warn, encoding))
-}
+## readLines<-function (con = stdin(), n = -1L, ok = TRUE, warn = FALSE, encoding = "unknown") 
+## {
+##     # Small change in realLines defaults  
+##     if (is.character(con)) {
+##         con <- file(con, "r")
+##         on.exit(close(con))
+##     }
+##     .Internal(readLines(con, n, ok, warn, encoding))
+## }
 
 read.table.nowarn<-function(...){
   tryCatch.W.E <- function(expr)
@@ -58,9 +58,9 @@ read.ices<-function(filen, testonly=FALSE){
   # 
   # Returns: A validated data matrix.
   
-  if(!file.exists(filen)){
-    stop(paste("File",filen, "does not exsist"))
-  }
+  ## if(!file.exists(filen)){
+  ##   stop(paste("File",filen, "does not exsist"))
+  ## }
   
   head<-scan(filen, skip=2, n=5, quiet=TRUE)
   minY<-head[1]
@@ -150,9 +150,9 @@ read.ices<-function(filen, testonly=FALSE){
 read.surveys<-function(filen){
   # Function to read ices survey file 
 
-  if(!file.exists(filen)){
-    stop(paste("File",filen, "does not exsist"))
-  }
+  ## if(!file.exists(filen)){
+  ##   stop(paste("File",filen, "does not exsist"))
+  ## }
 
   lin<-readLines(filen,warn=FALSE)[-c(1:2)]
   empty<-which(lapply(lapply(strsplit(lin, split='[[:space:]]+'), 
