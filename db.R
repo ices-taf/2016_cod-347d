@@ -1,8 +1,10 @@
 ## Download and preprocess data, write TAF input tables
 
-## Before: stockobject.Rdata (ftp)
-## After:  latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
-##         survey_uk.csv, survey_fr.csv (db)
+## Before: cn.dat, cw.dat, dw.dat, lw.dat, sw.dat, mo_raw.dat, nm.dat,
+##         survey.dat, lf.dat, pf.dat, pm.dat (ftp)
+## After:  catage.csv, wcatch.csv, datage.csv, wdiscards.csv, latage.csv,
+##         wlandings.csv, maturity.csv, natmort.csv, ibts_1.csv, ibts_3.csv,
+##         data.RData (db)
 
 require(icesTAF, quietly=TRUE)
 suppressMessages(require(mgcv, quietly=TRUE))
@@ -10,11 +12,10 @@ source("utilities.R") # require(stockassessment)
 
 ftp <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
 
-dir.create("db", showWarnings=FALSE)
+mkdir("db")
 
 ## Get data
 setwd("db")
-catch.no <- read.ices(paste0(ftp, "data/cn.dat"))
 catch.no <- read.ices(paste0(ftp, "data/cn.dat"))
 catch.mean.weight <- read.ices(paste0(ftp, "data/cw.dat"))
 dis.mean.weight <- read.ices(paste0(ftp, "data/dw.dat"))
