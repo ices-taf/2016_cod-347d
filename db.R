@@ -1,6 +1,6 @@
 require(icesTAF, quietly=TRUE)
 suppressMessages(require(mgcv, quietly=TRUE))
-source("support_functions.R") # require(stockassessment)
+source("utilities.R") # require(stockassessment)
 
 ftp.remote <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
 ftp.local <- "../../../ftp/wgnssk/2016/cod-347d/"

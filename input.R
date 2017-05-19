@@ -1,4 +1,4 @@
-source("support_functions.R") # require(stockassessment)
+source("utilities.R") # require(stockassessment)
 
 dir.create("input", showWarnings=FALSE)
 
