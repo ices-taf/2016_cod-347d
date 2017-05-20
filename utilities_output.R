@@ -203,14 +203,14 @@ dummyplot<-function(text='This plot is intentionally left blank'){
   text(.5,.5,labels=text)
 }
 
-readLines<-function (con = stdin(), n = -1L, ok = TRUE, warn = FALSE, encoding = "unknown") 
-{
-    if (is.character(con)) {
-        con <- file(con, "r")
-        on.exit(close(con))
-    }
-    .Internal(readLines(con, n, ok, warn, encoding))
-}
+## readLines<-function (con = stdin(), n = -1L, ok = TRUE, warn = FALSE, encoding = "unknown") 
+## {
+##     if (is.character(con)) {
+##         con <- file(con, "r")
+##         on.exit(close(con))
+##     }
+##     .Internal(readLines(con, n, ok, warn, encoding))
+## }
 
 stampit<-function() {
   x<-system('svn info', intern=TRUE)
