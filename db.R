@@ -6,9 +6,9 @@
 ##         wlandings.csv, maturity.csv, natmort.csv, ibts_1.csv, ibts_3.csv,
 ##         data.RData (db)
 
-require(icesTAF, quietly=TRUE)
-suppressMessages(require(mgcv, quietly=TRUE))
-source("utilities.R") # require(stockassessment)
+library(icesTAF)
+suppressMessages(library(mgcv))
+source("utilities.R")
 
 ftp <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
 

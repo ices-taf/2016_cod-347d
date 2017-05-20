@@ -3,8 +3,8 @@
 ## Before: data.RData (db)
 ## After:  sam.dat (input)
 
-require(icesTAF, quietly=TRUE)
-source("utilities.R") # require(stockassessment)
+library(icesTAF)
+source("utilities.R")
 
 mkdir("input")
 
