@@ -8,7 +8,7 @@
 
 library(icesTAF)
 suppressMessages(library(mgcv))
-source("utilities.R")
+source("utilities_input.R")
 
 ftp <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
 

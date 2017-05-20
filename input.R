@@ -4,7 +4,7 @@
 ## After:  sam.dat (input)
 
 library(icesTAF)
-source("utilities.R")
+source("utilities_input.R")
 
 mkdir("input")
 
