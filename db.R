@@ -93,7 +93,7 @@ natmort <- xtab2taf(natural.mortality)
 ibts_1 <- xtab2taf(surveys[[1]])
 ibts_3 <- xtab2taf(surveys[[2]])
 
-## Write TAF tables to db directory
+## Write tables to db directory
 write.taf(latage, "db/latage.csv") # 2a
 write.taf(datage, "db/datage.csv") # 2b
 write.taf(catage, "db/catage.csv") # 2c
