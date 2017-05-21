@@ -39,22 +39,18 @@ colnames(tab3) <- paste(1:ncol(tab3)+minAge-1, c(rep("",ncol(tab3)-1),"+"), sep=
 
 ## Scale table
 tab4 <- exp(fit.current$logscale[,c(1,3,4)])
-if(nrow(tab4) > 0)
-{
+if(nrow(tab4) > 0) {
   idx1 <- grep("Years in which catch data are to be scaled", readLines(conffile))
   idx2 <- grep("Define Fbar range", readLines(conffile))
   num <- scan(conffile, skip=idx1, comment.char="#", quiet=TRUE, nlines=idx2-idx1)
   n <- num[1]
   y <- num[2:(n+1)]
   key <- matrix(num[-c(1:(n+1))], nrow=length(y), byrow=TRUE)
-  if(!all(apply(key, 1, function(x)length(unique(x))==1)))
-  {
+  if(!all(apply(key, 1, function(x)length(unique(x))==1))) {
     tab4 <- matrix(tab4[,1][key], nrow=length(y))
     colnames(tab4) <- paste(1:ncol(tab3)+minAge-1, c(rep("",ncol(tab3)-1),"+"), sep="")
     rownames(tab4) <- y
-  }
-  else
-  { # important special case
+  } else { # important special case
     colnames(tab4) <- c("Catch multiplier", "Low", "High")
     rownames(tab4) <- y[key[,1]]
   }
