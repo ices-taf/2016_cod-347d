@@ -14,5 +14,9 @@ library(icesTAF)
 mkdir("upload/input")
 mkdir("upload/output")
 
-cp("db/*.csv", "upload/input")
+## All CSV except *_full.csv
+db <- Sys.glob("db/*.csv")
+db <- grep("_full.csv", db, value=TRUE, invert=TRUE)
+
+cp(db, "upload/input")
 cp("output/*.csv", "upload/output")

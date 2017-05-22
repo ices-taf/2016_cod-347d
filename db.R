@@ -29,6 +29,12 @@ dis.no <- catch.no - land.no
 prop.f <- read.ices(paste0(ftp, "data/pf.dat"))
 prop.m <- read.ices(paste0(ftp, "data/pm.dat"))
 download.file(paste0(ftp,"data/mo_raw.dat"), "mo_raw.dat", quiet=TRUE)
+## full datasets for report.R
+catch.no.full <- catch.no
+land.no.full <- land.no
+land.mean.weight.full <- land.mean.weight
+dis.mean.weight.full <- dis.mean.weight
+catch.mean.weight.full <- catch.mean.weight
 
 ## Smooth maturity
 skipYears <- c(1:10, 54)
@@ -52,7 +58,7 @@ cat(head[5], "\n", file=file, append=TRUE)
 write.table(round(prop.mature,4), file=file, row.names=FALSE, col.names=FALSE, append=TRUE)
 setwd("..")
 
-## Modify to 7+ data
+## Modify to 6+ data
 cutage <- 6
 low <- 1
 GE <- which(as.numeric(colnames(catch.no)) >= cutage)
@@ -81,6 +87,12 @@ land.frac <- ifelse(catch.no>0, land.no/catch.no, 1)
 prop.f <- prop.f[,low:E]
 prop.m <- prop.m[,low:E]
 
+## Catch as sum of products
+sop <- data.frame(Landings=rowSums(land.no * land.mean.weight),
+                  Discards=rowSums((catch.no-land.no) * dis.mean.weight))
+sop$Catch <- sop$Landings + sop$Discards
+## sop$Catch2 <- rowSums(catch.no * catch.mean.weight)
+
 ## Prepare tables for export
 latage <- xtab2taf(land.no)
 datage <- xtab2taf(catch.no - land.no)
@@ -92,6 +104,14 @@ maturity <- xtab2taf(prop.mature)
 natmort <- xtab2taf(natural.mortality)
 ibts_1 <- xtab2taf(surveys[[1]])
 ibts_3 <- xtab2taf(surveys[[2]])
+## full datasets for report.R
+latage_full <- xtab2taf(land.no.full)
+datage_full <- xtab2taf(catch.no.full - land.no.full)
+catage_full <- xtab2taf(catch.no.full)
+wlandings_full <- xtab2taf(land.mean.weight.full)
+wdiscards_full <- xtab2taf(dis.mean.weight.full)
+wcatch_full <- xtab2taf(catch.mean.weight.full)
+catch_sop <- xtab2taf(sop)
 
 ## Write tables to db directory
 write.taf(latage, "db/latage.csv") # 2a
@@ -100,10 +120,18 @@ write.taf(catage, "db/catage.csv") # 2c
 write.taf(wlandings, "db/wlandings.csv") # 3a
 write.taf(wdiscards, "db/wdiscards.csv") # 3b
 write.taf(wcatch, "db/wcatch.csv")       # 3c
+write.taf(catch_sop, "db/catch_sop.csv") # 4
 write.taf(maturity, "db/maturity.csv") # 5a
 write.taf(natmort, "db/natmort.csv")   # 5b
 write.taf(ibts_1, "db/ibts_1.csv") # 6a
 write.taf(ibts_3, "db/ibts_3.csv") # 6b
+## full datasets for report.R
+write.taf(latage_full, "db/latage_full.csv")
+write.taf(datage_full, "db/datage_full.csv")
+write.taf(catage_full, "db/catage_full.csv")
+write.taf(wlandings_full, "db/wlandings_full.csv")
+write.taf(wdiscards_full, "db/wdiscards_full.csv")
+write.taf(wcatch_full, "db/wcatch_full.csv")
 
 ## Save objects required by input.R
 save(surveys, catch.no, prop.mature,
