@@ -76,7 +76,7 @@ names(sub) <- c("year", "age", "logPred")
 mat <- reshape(sub, idvar="year", timevar="age", direction="wide")
 rownames(mat) <- mat[,1]
 tab8 <- exp(mat[,-1])
-colnames(tab8) <- c(1:(ncol(tab8)-1), "+")
+colnames(tab8) <- paste(1:ncol(tab8)+minAge-1, c(rep("",ncol(tab8)-1),"+"), sep="")
 
 ## Prepare tables for export
 summary <- xtab2taf(tab1)
