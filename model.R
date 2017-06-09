@@ -16,4 +16,4 @@ Sys.chmod(paste0("model/", sam))
 cp("input/sam.dat", "model")
 
 setwd("model")
-system("sam -nr 2 -noinit")
+system("./sam -nr 2 -noinit")
