@@ -1,17 +1,19 @@
 ## Run analysis, write model results
 
+## Before: model.cfg, sam.pin, sam (stockassessment.org), sam.dat (input)
+## After:  sam.par, sam.rep, sam.res, sam.cor, confclone.log, model.cfg (model)
+
 library(icesTAF)
 
 mkdir("model")
 
-ftp <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
+url <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
 
-download.file(paste0(ftp,"run/model.cfg"), "model/model.cfg", quiet=TRUE)
-download.file(paste0(ftp,"run/sam.pin"), "model/sam.pin", quiet=TRUE)
+download(paste0(url,"run/model.cfg"), "model")
+download(paste0(url,"run/sam.pin"), "model")
 
 sam <- if(.Platform$OS.type == "unix") "sam" else "sam.exe"
-download.file(paste0(ftp,"/run/",sam), paste0("model/",sam), quiet=TRUE)
-Sys.chmod(paste0("model/", sam))
+download(paste0(url,"/run/",sam), "model")
 
 cp("input/sam.dat", "model")
 
