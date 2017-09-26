@@ -2,7 +2,7 @@
 
 ## Before: catage.csv, smh.csv, wstock.csv, wcatch.csv,
 ##         maturity.csv, summary.csv, natage.csv,
-##         fatage.csv (db, upload)
+##         fatage.csv (data, upload)
 ## After:  catage_rep.csv, smh_rep.csv, wstock_rep.csv, wcatch_rep.csv,
 ##         maturity_rep.csv, summary_rep.csv, natage_rep.csv,
 ##         fatage_rep.csv (upload)
@@ -12,7 +12,7 @@ library(icesTAF)
 mkdir("upload/report")
 
 ## latage (trim age, round, transpose)
-latage <- read.taf("db/latage_full.csv")
+latage <- read.taf("data/latage_full.csv")
 latage$"11" <- rowSums(latage[as.character(11:15)])
 latage <- latage[c("Year",as.character(1:11))]
 names(latage)[ncol(latage)] <- "+gp"
@@ -21,7 +21,7 @@ latage <- tt(latage)
 write.taf(latage, "upload/report/latage_rep.csv")
 
 ## datage (trim age, round, transpose)
-datage <- read.taf("db/datage_full.csv")
+datage <- read.taf("data/datage_full.csv")
 datage$"11" <- rowSums(datage[as.character(11:15)])
 datage <- datage[c("Year",as.character(1:11))]
 names(datage)[ncol(datage)] <- "+gp"
@@ -30,7 +30,7 @@ datage <- tt(datage)
 write.taf(datage, "upload/report/datage_rep.csv")
 
 ## catage (trim age, round, transpose)
-catage <- read.taf("db/catage_full.csv")
+catage <- read.taf("data/catage_full.csv")
 catage$"11" <- rowSums(catage[as.character(11:15)])
 catage <- catage[c("Year",as.character(1:11))]
 names(catage)[ncol(catage)] <- "+gp"
@@ -39,8 +39,8 @@ catage <- tt(catage)
 write.taf(catage, "upload/report/catage_rep.csv")
 
 ## wlandings (trim age, round, transpose)
-wlandings <- read.taf("db/wlandings_full.csv")
-prop <- read.taf("db/latage_full.csv")[as.character(11:15)]
+wlandings <- read.taf("data/wlandings_full.csv")
+prop <- read.taf("data/latage_full.csv")[as.character(11:15)]
 wplus <- rowSums(wlandings[as.character(11:15)] * prop / rowSums(prop))
 wplus[is.nan(wplus)] <- 0
 wlandings$"11" <- wplus
@@ -51,8 +51,8 @@ wlandings <- tt(wlandings)
 write.taf(wlandings, "upload/report/wlandings_rep.csv")
 
 ## wdiscards (trim age, round, transpose)
-wdiscards <- read.taf("db/wdiscards_full.csv")
-prop <- read.taf("db/datage_full.csv")[as.character(11:15)]
+wdiscards <- read.taf("data/wdiscards_full.csv")
+prop <- read.taf("data/datage_full.csv")[as.character(11:15)]
 wplus <- rowSums(wdiscards[as.character(11:15)] * prop / rowSums(prop))
 wplus[is.nan(wplus)] <- 0
 wdiscards$"11" <- wplus
@@ -63,8 +63,8 @@ wdiscards <- tt(wdiscards)
 write.taf(wdiscards, "upload/report/wdiscards_rep.csv")
 
 ## wcatch (trim age, round, transpose)
-wcatch <- read.taf("db/wcatch_full.csv")
-prop <- read.taf("db/catage_full.csv")[as.character(11:15)]
+wcatch <- read.taf("data/wcatch_full.csv")
+prop <- read.taf("data/catage_full.csv")[as.character(11:15)]
 wplus <- rowSums(wcatch[as.character(11:15)] * prop / rowSums(prop))
 wplus[is.nan(wplus)] <- 0
 wcatch$"11" <- wplus
