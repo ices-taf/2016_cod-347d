@@ -1,6 +1,6 @@
 ## Convert data to model format, write model input files
 
-## Before: data.RData (db)
+## Before: data.RData (data)
 ## After:  sam.dat (input)
 
 library(icesTAF)
@@ -8,7 +8,7 @@ source("utilities_input.R")
 
 mkdir("input")
 
-load("db/data.RData")
+load("data/data.RData")
 
 ## Write the file with data prepared for state-space assessment
 data <- write.records(surveys=surveys,

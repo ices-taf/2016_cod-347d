@@ -1,34 +1,34 @@
-## Download and preprocess data, write TAF input tables
+## Preprocess data, write TAF input tables
 
 ## Before: cn.dat, cw.dat, dw.dat, lw.dat, sw.dat, mo_raw.dat, nm.dat,
-##         survey.dat, lf.dat, pf.dat, pm.dat (ftp)
+##         survey.dat, lf.dat, pf.dat, pm.dat (stockassessment.org)
 ## After:  catage.csv, wcatch.csv, datage.csv, wdiscards.csv, latage.csv,
 ##         wlandings.csv, maturity.csv, natmort.csv, ibts_1.csv, ibts_3.csv,
-##         data.RData (db)
+##         data.RData (data)
 
 library(icesTAF)
 suppressMessages(library(mgcv))
 source("utilities_input.R")
 
-ftp <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
+url <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
 
-mkdir("db")
+mkdir("data")
 
 ## Get data
-setwd("db")
-catch.no <- read.ices(paste0(ftp, "data/cn.dat"))
-catch.mean.weight <- read.ices(paste0(ftp, "data/cw.dat"))
-dis.mean.weight <- read.ices(paste0(ftp, "data/dw.dat"))
-land.mean.weight <- read.ices(paste0(ftp, "data/lw.dat"))
-stock.mean.weight <- read.ices(paste0(ftp, "data/sw.dat"))
-prop.mature <- read.ices(paste0(ftp, "data/mo_raw.dat"))
-natural.mortality <- read.ices(paste0(ftp, "data/nm.dat"))
-surveys <- read.surveys(paste0(ftp, "data/survey.dat"))
-land.no <- read.ices(paste0(ftp, "data/lf.dat"))
+setwd("data")
+catch.no <- read.ices(paste0(url, "data/cn.dat"))
+catch.mean.weight <- read.ices(paste0(url, "data/cw.dat"))
+dis.mean.weight <- read.ices(paste0(url, "data/dw.dat"))
+land.mean.weight <- read.ices(paste0(url, "data/lw.dat"))
+stock.mean.weight <- read.ices(paste0(url, "data/sw.dat"))
+prop.mature <- read.ices(paste0(url, "data/mo_raw.dat"))
+natural.mortality <- read.ices(paste0(url, "data/nm.dat"))
+surveys <- read.surveys(paste0(url, "data/survey.dat"))
+land.no <- read.ices(paste0(url, "data/lf.dat"))
 dis.no <- catch.no - land.no
-prop.f <- read.ices(paste0(ftp, "data/pf.dat"))
-prop.m <- read.ices(paste0(ftp, "data/pm.dat"))
-download.file(paste0(ftp,"data/mo_raw.dat"), "mo_raw.dat", quiet=TRUE)
+prop.f <- read.ices(paste0(url, "data/pf.dat"))
+prop.m <- read.ices(paste0(url, "data/pm.dat"))
+download(paste0(url,"data/mo_raw.dat"))
 ## full datasets for report.R
 catch.no.full <- catch.no
 land.no.full <- land.no
@@ -113,28 +113,28 @@ wdiscards_full <- xtab2taf(dis.mean.weight.full)
 wcatch_full <- xtab2taf(catch.mean.weight.full)
 catch_sop <- xtab2taf(sop)
 
-## Write tables to db directory
-write.taf(latage, "db/latage.csv") # 2a
-write.taf(datage, "db/datage.csv") # 2b
-write.taf(catage, "db/catage.csv") # 2c
-write.taf(wlandings, "db/wlandings.csv") # 3a
-write.taf(wdiscards, "db/wdiscards.csv") # 3b
-write.taf(wcatch, "db/wcatch.csv")       # 3c
-write.taf(catch_sop, "db/catch_sop.csv") # 4
-write.taf(maturity, "db/maturity.csv") # 5a
-write.taf(natmort, "db/natmort.csv")   # 5b
-write.taf(ibts_1, "db/ibts_1.csv") # 6a
-write.taf(ibts_3, "db/ibts_3.csv") # 6b
+## Write tables to data directory
+write.taf(latage, "data/latage.csv") # 2a
+write.taf(datage, "data/datage.csv") # 2b
+write.taf(catage, "data/catage.csv") # 2c
+write.taf(wlandings, "data/wlandings.csv") # 3a
+write.taf(wdiscards, "data/wdiscards.csv") # 3b
+write.taf(wcatch, "data/wcatch.csv")       # 3c
+write.taf(catch_sop, "data/catch_sop.csv") # 4
+write.taf(maturity, "data/maturity.csv") # 5a
+write.taf(natmort, "data/natmort.csv")   # 5b
+write.taf(ibts_1, "data/ibts_1.csv") # 6a
+write.taf(ibts_3, "data/ibts_3.csv") # 6b
 ## full datasets for report.R
-write.taf(latage_full, "db/latage_full.csv")
-write.taf(datage_full, "db/datage_full.csv")
-write.taf(catage_full, "db/catage_full.csv")
-write.taf(wlandings_full, "db/wlandings_full.csv")
-write.taf(wdiscards_full, "db/wdiscards_full.csv")
-write.taf(wcatch_full, "db/wcatch_full.csv")
+write.taf(latage_full, "data/latage_full.csv")
+write.taf(datage_full, "data/datage_full.csv")
+write.taf(catage_full, "data/catage_full.csv")
+write.taf(wlandings_full, "data/wlandings_full.csv")
+write.taf(wdiscards_full, "data/wdiscards_full.csv")
+write.taf(wcatch_full, "data/wcatch_full.csv")
 
 ## Save objects required by input.R
 save(surveys, catch.no, prop.mature,
      stock.mean.weight, catch.mean.weight, dis.mean.weight, land.mean.weight,
      prop.f, prop.m, natural.mortality, land.frac,
-     file="db/data.RData")
+     file="data/data.RData")
