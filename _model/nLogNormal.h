@@ -32,10 +32,10 @@
 #include <fvar.hpp>
 #include <math.h>
 
-_CONST double log2pi = log(2.0*M_PI);
+const double log2pi = log(2.0*M_PI);
 
 template<class MatrixType>
-MatrixType bksolve(_CONST MatrixType& L, _CONST MatrixType& b)
+MatrixType bksolve(const MatrixType& L, const MatrixType& b)
 {
   RETURN_ARRAYS_INCREMENT();
   int i, k, r, R, c, C;
@@ -57,7 +57,7 @@ MatrixType bksolve(_CONST MatrixType& L, _CONST MatrixType& b)
 }
 
 template <class VectorType, class MatrixType>
-  VectorType nLogNormal(_CONST VectorType& x, _CONST MatrixType& mu, _CONST MatrixType& S)
+  VectorType nLogNormal(const VectorType& x, const MatrixType& mu, const MatrixType& S)
 {
   RETURN_ARRAYS_INCREMENT();
   int r, R, c, C, N;
@@ -85,7 +85,7 @@ template <class VectorType, class MatrixType>
 }
 
 template <class VectorType, class MatrixType>
-  VectorType nLogNormal(_CONST MatrixType& x, _CONST VectorType& mu, _CONST MatrixType& S)
+  VectorType nLogNormal(const MatrixType& x, const VectorType& mu, const MatrixType& S)
 {
   RETURN_ARRAYS_INCREMENT();
   VectorType ret=nLogNormal(mu, x, S);
@@ -93,7 +93,7 @@ template <class VectorType, class MatrixType>
   return ret;
 }
 
-df1b2variable nLogNormal(_CONST df1b2vector& x, _CONST df1b2vector& mu, _CONST df1b2matrix& S)
+df1b2variable nLogNormal(const df1b2vector& x, const df1b2vector& mu, const df1b2matrix& S)
 {
   RETURN_ARRAYS_INCREMENT();
   int r=mu.indexmin(), R=mu.indexmax();
@@ -105,7 +105,7 @@ df1b2variable nLogNormal(_CONST df1b2vector& x, _CONST df1b2vector& mu, _CONST d
   return ret;
 }
 
-dvariable nLogNormal(_CONST dvar_vector& x, _CONST dvar_vector& mu, _CONST dvar_matrix& S)
+dvariable nLogNormal(const dvar_vector& x, const dvar_vector& mu, const dvar_matrix& S)
 {
   RETURN_ARRAYS_INCREMENT();
   dvar_matrix MU(mu.indexmin(),mu.indexmax(),1,1);
