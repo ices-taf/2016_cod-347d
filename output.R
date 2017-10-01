@@ -1,5 +1,9 @@
 ## Extract model results of interest, write TAF output tables
 
+## Before: sam.par, sam.rep, sam.res, sam.cor, confclone.log, model.cfg (model)
+## After:  fatage.csv, natage.csv, catage_fit.csv, summary.csv, catch.csv,
+##         multiplier.csv (output)
+
 library(icesTAF)
 
 mkdir("output")
