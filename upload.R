@@ -3,7 +3,7 @@
 ## Before: catage.csv, datage.csv, data.RData, ibts_1.csv, ibts_3.csv,
 ##         latage.csv, maturity.csv, mo.dat, mo_raw.dat, natmort.csv,
 ##         wcatch.csv, wdiscards.csv, wlandings.csv,, catage_fit.csv, catch.csv,
-##         fatage.csv, multiplier.csv, natage.csv, summary.csv (db, output)
+##         fatage.csv, multiplier.csv, natage.csv, summary.csv (data, output)
 ## After:  catage.csv, datage.csv, data.RData, ibts_1.csv, ibts_3.csv,
 ##         latage.csv, maturity.csv, mo.dat, mo_raw.dat, natmort.csv,
 ##         wcatch.csv, wdiscards.csv, wlandings.csv,, catage_fit.csv, catch.csv,
@@ -15,8 +15,8 @@ mkdir("upload/input")
 mkdir("upload/output")
 
 ## All CSV except *_full.csv
-db <- Sys.glob("db/*.csv")
-db <- grep("_full.csv", db, value=TRUE, invert=TRUE)
+data <- Sys.glob("data/*.csv")
+data <- grep("_full.csv", data, value=TRUE, invert=TRUE)
 
-cp(db, "upload/input")
+cp(data, "upload/input")
 cp("output/*.csv", "upload/output")
