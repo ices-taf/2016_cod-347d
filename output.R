@@ -26,8 +26,8 @@ ssb <- exp(fit.current$logssb[,c(1,3,4)])
 fbar <- exp(fit.current$logfbar[,c(1,3,4)])
 tab1 <- cbind(R, tsb, ssb, fbar)
 tab1[nrow(tab1),-c(7:9)] <- NA
-colnames(tab1) <- c("Recruits", "Low", "High", "TSB", "Low", "High", "SSB", "Low", "High",
-                    paste("F",range.fbar[1],range.fbar[2],sep=""), "Low", "High")
+colnames(tab1) <- c("Rec", "Rec_lo", "Rec_hi", "TSB", "TSB_lo", "TSB_hi",
+                    "SSB", "SSB_lo", "SSB_hi", "Fbar", "Fbar_lo", "Fbar_hi")
 rownames(tab1) <- fit.current$years
 
 ## N table
