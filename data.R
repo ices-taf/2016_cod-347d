@@ -28,7 +28,6 @@ land.no <- read.ices(paste0(url, "lf.dat"))
 dis.no <- catch.no - land.no
 prop.f <- read.ices(paste0(url, "pf.dat"))
 prop.m <- read.ices(paste0(url, "pm.dat"))
-download(paste0(url,"mo_raw.dat"))
 ## full datasets for report.R
 catch.no.full <- catch.no
 land.no.full <- land.no
@@ -48,14 +47,6 @@ for(cc in columnsToSmooth){
 }
 prop.mature[-c(skipYears),] <- mo
 prop.mature[54,] <- prop.mature[53,]
-head <- readLines("mo_raw.dat", n=5)
-file <- "mo.dat"
-cat(paste(head[1],"smoothed"), "\n", file=file)
-cat(head[2], "\n", file=file, append=TRUE)
-cat(head[3], "\n", file=file, append=TRUE)
-cat(head[4], "\n", file=file, append=TRUE)
-cat(head[5], "\n", file=file, append=TRUE)
-write.table(round(prop.mature,4), file=file, row.names=FALSE, col.names=FALSE, append=TRUE)
 setwd("..")
 
 ## Modify to 6+ data
