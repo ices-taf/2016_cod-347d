@@ -10,25 +10,25 @@ library(icesTAF)
 suppressMessages(library(mgcv))
 source("utilities_input.R")
 
-url <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/"
+url <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/data/"
 
 mkdir("data")
 
 ## Get data
 setwd("data")
-catch.no <- read.ices(paste0(url, "data/cn.dat"))
-catch.mean.weight <- read.ices(paste0(url, "data/cw.dat"))
-dis.mean.weight <- read.ices(paste0(url, "data/dw.dat"))
-land.mean.weight <- read.ices(paste0(url, "data/lw.dat"))
-stock.mean.weight <- read.ices(paste0(url, "data/sw.dat"))
-prop.mature <- read.ices(paste0(url, "data/mo_raw.dat"))
-natural.mortality <- read.ices(paste0(url, "data/nm.dat"))
-surveys <- read.surveys(paste0(url, "data/survey.dat"))
-land.no <- read.ices(paste0(url, "data/lf.dat"))
+catch.no <- read.ices(paste0(url, "cn.dat"))
+catch.mean.weight <- read.ices(paste0(url, "cw.dat"))
+dis.mean.weight <- read.ices(paste0(url, "dw.dat"))
+land.mean.weight <- read.ices(paste0(url, "lw.dat"))
+stock.mean.weight <- read.ices(paste0(url, "sw.dat"))
+prop.mature <- read.ices(paste0(url, "mo_raw.dat"))
+natural.mortality <- read.ices(paste0(url, "nm.dat"))
+surveys <- read.surveys(paste0(url, "survey.dat"))
+land.no <- read.ices(paste0(url, "lf.dat"))
 dis.no <- catch.no - land.no
-prop.f <- read.ices(paste0(url, "data/pf.dat"))
-prop.m <- read.ices(paste0(url, "data/pm.dat"))
-download(paste0(url,"data/mo_raw.dat"))
+prop.f <- read.ices(paste0(url, "pf.dat"))
+prop.m <- read.ices(paste0(url, "pm.dat"))
+download(paste0(url,"mo_raw.dat"))
 ## full datasets for report.R
 catch.no.full <- catch.no
 land.no.full <- land.no
