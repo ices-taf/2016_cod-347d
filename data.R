@@ -28,12 +28,13 @@ land.no <- read.ices(paste0(url, "lf.dat"))
 dis.no <- catch.no - land.no
 prop.f <- read.ices(paste0(url, "pf.dat"))
 prop.m <- read.ices(paste0(url, "pm.dat"))
-## full datasets for report.R
+## full datasets, including all ages
 catch.no.full <- catch.no
 land.no.full <- land.no
 land.mean.weight.full <- land.mean.weight
 dis.mean.weight.full <- dis.mean.weight
 catch.mean.weight.full <- catch.mean.weight
+stock.mean.weight.full <- stock.mean.weight
 
 ## Smooth maturity
 skipYears <- c(1:10, 54)
@@ -91,18 +92,21 @@ catage <- xtab2taf(catch.no)
 wlandings <- xtab2taf(land.mean.weight)
 wdiscards <- xtab2taf(dis.mean.weight)
 wcatch <- xtab2taf(catch.mean.weight)
+wstock <- xtab2taf(stock.mean.weight)
 maturity <- xtab2taf(prop.mature)
 natmort <- xtab2taf(natural.mortality)
 ibts_1 <- xtab2taf(surveys[[1]])
 ibts_3 <- xtab2taf(surveys[[2]])
-## full datasets for report.R
+catch_sop <- xtab2taf(sop)
+## full datasets, including all ages
 latage_full <- xtab2taf(land.no.full)
 datage_full <- xtab2taf(catch.no.full - land.no.full)
 catage_full <- xtab2taf(catch.no.full)
 wlandings_full <- xtab2taf(land.mean.weight.full)
 wdiscards_full <- xtab2taf(dis.mean.weight.full)
 wcatch_full <- xtab2taf(catch.mean.weight.full)
-catch_sop <- xtab2taf(sop)
+wstock_full <- xtab2taf(stock.mean.weight.full)
+maturity_full <- xtab2taf(prop.mature.full)
 
 ## Write tables to data directory
 write.taf(latage, "data/latage.csv") # 2a
