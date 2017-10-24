@@ -1,10 +1,13 @@
 ## Preprocess data, write TAF input tables
 
 ## Before: cn.dat, cw.dat, dw.dat, lw.dat, sw.dat, mo_raw.dat, nm.dat,
-##         survey.dat, lf.dat, pf.dat, pm.dat (stockassessment.org)
-## After:  catage.csv, wcatch.csv, datage.csv, wdiscards.csv, latage.csv,
-##         wlandings.csv, maturity.csv, natmort.csv, ibts_1.csv, ibts_3.csv,
-##         data.RData (data)
+##         survey.dat, lf.dat, pf.dat, pm.dat (TAF database)
+## After:  catage.csv, catage_full.csv, catch_sop.csv, datage.csv,
+##         datage_full.csv, ibts1.csv, ibts3.csv, landfrac.csv, latage.csv,
+##         latage_full.csv, maturity.csv, maturity_full.csv, natmort.csv,
+##         propf.csv, propm.csv, wcatch.csv, wcatch_full.csv, wdiscards.csv,
+##         wdiscards_full.csv, wlandings.csv, wlandings_full.csv, wstock.csv,
+##         wstock_full.csv (data)
 
 library(icesTAF)
 suppressMessages(library(mgcv))
@@ -114,27 +117,29 @@ wstock_full <- xtab2taf(stock.mean.weight.full)
 maturity_full <- xtab2taf(prop.mature.full)
 
 ## Write tables to data directory
-write.taf(latage, "data/latage.csv") # 2a
-write.taf(datage, "data/datage.csv") # 2b
-write.taf(catage, "data/catage.csv") # 2c
-write.taf(wlandings, "data/wlandings.csv") # 3a
-write.taf(wdiscards, "data/wdiscards.csv") # 3b
-write.taf(wcatch, "data/wcatch.csv")       # 3c
-write.taf(catch_sop, "data/catch_sop.csv") # 4
-write.taf(maturity, "data/maturity.csv") # 5a
-write.taf(natmort, "data/natmort.csv")   # 5b
-write.taf(ibts_1, "data/ibts_1.csv") # 6a
-write.taf(ibts_3, "data/ibts_3.csv") # 6b
-## full datasets for report.R
-write.taf(latage_full, "data/latage_full.csv")
-write.taf(datage_full, "data/datage_full.csv")
-write.taf(catage_full, "data/catage_full.csv")
-write.taf(wlandings_full, "data/wlandings_full.csv")
-write.taf(wdiscards_full, "data/wdiscards_full.csv")
-write.taf(wcatch_full, "data/wcatch_full.csv")
-
-## Save objects required by input.R
-save(surveys, catch.no, prop.mature,
-     stock.mean.weight, catch.mean.weight, dis.mean.weight, land.mean.weight,
-     prop.f, prop.m, natural.mortality, land.frac,
-     file="data/data.RData")
+write.taf(latage, "latage.csv") # 2a
+write.taf(datage, "datage.csv") # 2b
+write.taf(catage, "catage.csv") # 2c
+write.taf(wlandings, "wlandings.csv") # 3a
+write.taf(wdiscards, "wdiscards.csv") # 3b
+write.taf(wcatch, "wcatch.csv")       # 3c
+write.taf(wstock, "wstock.csv")
+write.taf(catch_sop, "catch_sop.csv") # 4
+write.taf(landfrac, "landfrac.csv")
+write.taf(maturity, "maturity.csv") # 5a
+write.taf(natmort, "natmort.csv")   # 5b
+write.taf(ibts1, "ibts1.csv") # 6a
+write.taf(ibts3, "ibts3.csv") # 6b
+write.taf(surveytime, "surveytime.csv")
+write.taf(propf, "propf.csv")
+write.taf(propm, "propm.csv")
+## full datasets, including all ages
+write.taf(latage_full, "latage_full.csv")
+write.taf(datage_full, "datage_full.csv")
+write.taf(catage_full, "catage_full.csv")
+write.taf(wlandings_full, "wlandings_full.csv")
+write.taf(wdiscards_full, "wdiscards_full.csv")
+write.taf(wcatch_full, "wcatch_full.csv")
+write.taf(wstock_full, "wstock_full.csv")
+write.taf(maturity_full, "maturity_full.csv")
+setwd("..")
