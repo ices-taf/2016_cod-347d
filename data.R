@@ -48,7 +48,7 @@ for(cc in columnsToSmooth){
 }
 prop.mature[-c(skipYears),] <- mo
 prop.mature[54,] <- prop.mature[53,]
-setwd("..")
+prop.mature.full <- prop.mature
 
 ## Modify to 6+ data
 cutage <- 6
@@ -95,9 +95,14 @@ wcatch <- xtab2taf(catch.mean.weight)
 wstock <- xtab2taf(stock.mean.weight)
 maturity <- xtab2taf(prop.mature)
 natmort <- xtab2taf(natural.mortality)
-ibts_1 <- xtab2taf(surveys[[1]])
-ibts_3 <- xtab2taf(surveys[[2]])
+ibts1 <- xtab2taf(surveys[[1]])
+ibts3 <- xtab2taf(surveys[[2]])
+surveytime <- as.data.frame(lapply(surveys, attr, "time"),
+                            col.names=c("ibts1","ibts3"))
 catch_sop <- xtab2taf(sop)
+landfrac <- xtab2taf(land.frac)
+propf <- xtab2taf(prop.f)
+propm <- xtab2taf(prop.m)
 ## full datasets, including all ages
 latage_full <- xtab2taf(land.no.full)
 datage_full <- xtab2taf(catch.no.full - land.no.full)
