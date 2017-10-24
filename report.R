@@ -1,15 +1,18 @@
 ## Prepare tables for report
 
-## Before: catage.csv, smh.csv, wstock.csv, wcatch.csv,
-##         maturity.csv, summary.csv, natage.csv,
-##         fatage.csv (data, upload)
-## After:  catage_rep.csv, smh_rep.csv, wstock_rep.csv, wcatch_rep.csv,
-##         maturity_rep.csv, summary_rep.csv, natage_rep.csv,
-##         fatage_rep.csv (upload)
+## Before: catage_full.csv, catch_sop.csv, datage_full.csv, ibts1.csv,
+##         ibts3.csv, latage_full.csv, maturity.csv, natmort.csv,
+##         wcatch_full.csv, wdiscards_full.csv, wlandings_full.csv (data),
+##         catage_fit.csv, catch_est.csv, fatage.csv, multiplier.csv,
+##         natage.csv, summary.csv (output)
+## After:  catage.csv, catage_fit.csv, catch_est.csv, catch_sop.csv, datage.csv,
+##         fatage.csv, ibts1.csv, ibts3.csv, latage.csv, maturity.csv,
+##         multiplier.csv, natage.csv, natmort.csv, summary.csv, wcatch.csv,
+##         wdiscards.csv, wlandings.csv (report)
 
 library(icesTAF)
 
-mkdir("upload/report")
+mkdir("report")
 
 ## latage (trim age, round, transpose)
 latage <- read.taf("data/latage_full.csv")
@@ -18,7 +21,7 @@ latage <- latage[c("Year",as.character(1:11))]
 names(latage)[ncol(latage)] <- "+gp"
 latage <- round(latage)
 latage <- tt(latage)
-write.taf(latage, "upload/report/latage_rep.csv")
+write.taf(latage, "report/latage.csv")
 
 ## datage (trim age, round, transpose)
 datage <- read.taf("data/datage_full.csv")
@@ -27,7 +30,7 @@ datage <- datage[c("Year",as.character(1:11))]
 names(datage)[ncol(datage)] <- "+gp"
 datage <- round(datage)
 datage <- tt(datage)
-write.taf(datage, "upload/report/datage_rep.csv")
+write.taf(datage, "report/datage.csv")
 
 ## catage (trim age, round, transpose)
 catage <- read.taf("data/catage_full.csv")
@@ -36,7 +39,7 @@ catage <- catage[c("Year",as.character(1:11))]
 names(catage)[ncol(catage)] <- "+gp"
 catage <- round(catage)
 catage <- tt(catage)
-write.taf(catage, "upload/report/catage_rep.csv")
+write.taf(catage, "report/catage.csv")
 
 ## wlandings (trim age, round, transpose)
 wlandings <- read.taf("data/wlandings_full.csv")
@@ -48,7 +51,7 @@ wlandings <- wlandings[c("Year",as.character(1:11))]
 names(wlandings)[ncol(wlandings)] <- "+gp"
 wlandings <- round(wlandings, 3)
 wlandings <- tt(wlandings)
-write.taf(wlandings, "upload/report/wlandings_rep.csv")
+write.taf(wlandings, "report/wlandings.csv")
 
 ## wdiscards (trim age, round, transpose)
 wdiscards <- read.taf("data/wdiscards_full.csv")
@@ -60,7 +63,7 @@ wdiscards <- wdiscards[c("Year",as.character(1:11))]
 names(wdiscards)[ncol(wdiscards)] <- "+gp"
 wdiscards <- round(wdiscards, 3)
 wdiscards <- tt(wdiscards)
-write.taf(wdiscards, "upload/report/wdiscards_rep.csv")
+write.taf(wdiscards, "report/wdiscards.csv")
 
 ## wcatch (trim age, round, transpose)
 wcatch <- read.taf("data/wcatch_full.csv")
@@ -72,63 +75,63 @@ wcatch <- wcatch[c("Year",as.character(1:11))]
 names(wcatch)[ncol(wcatch)] <- "+gp"
 wcatch <- round(wcatch, 3)
 wcatch <- tt(wcatch)
-write.taf(wcatch, "upload/report/wcatch_rep.csv")
+write.taf(wcatch, "report/wcatch.csv")
 
 ## catch_sop (round)
-catch_sop <- read.taf("upload/input/catch_sop.csv")
+catch_sop <- read.taf("data/catch_sop.csv")
 catch_sop <- round(catch_sop)
-write.taf(catch_sop, "upload/report/catch_sop_rep.csv")
+write.taf(catch_sop, "report/catch_sop.csv")
 
 ## maturity (round)
-maturity <- read.taf("upload/input/maturity.csv")
+maturity <- read.taf("data/maturity.csv")
 maturity <- round(maturity, 3)
-write.taf(maturity, "upload/report/maturity_rep.csv")
+write.taf(maturity, "report/maturity.csv")
 
 ## natmort (round)
-natmort <- read.taf("upload/input/natmort.csv")
+natmort <- read.taf("data/natmort.csv")
 natmort <- round(natmort, 3)
-write.taf(natmort, "upload/report/natmort_rep.csv")
+write.taf(natmort, "report/natmort.csv")
 
-## ibts_1 (round)
-ibts_1 <- read.taf("upload/input/ibts_1.csv")
-ibts_1 <- round(ibts_1, 2)
-write.taf(ibts_1, "upload/report/ibts_1_rep.csv")
+## ibts1 (round)
+ibts1 <- read.taf("data/ibts1.csv")
+ibts1 <- round(ibts1, 2)
+write.taf(ibts1, "report/ibts1.csv")
 
-## ibts_3 (round)
-ibts_3 <- read.taf("upload/input/ibts_3.csv")
-ibts_3 <- round(ibts_3, 2)
-write.taf(ibts_3, "upload/report/ibts_3_rep.csv")
+## ibts3 (round)
+ibts3 <- read.taf("data/ibts3.csv")
+ibts3 <- round(ibts3, 2)
+write.taf(ibts3, "report/ibts3.csv")
 
 ## fatage (average, round)
-fatage <- read.taf("upload/output/fatage.csv")
+fatage <- read.taf("output/fatage.csv")
 fatage$"Fbar 2-4" <- rowMeans(fatage[as.character(2:4)])
 fatage <- round(fatage, 3)
-write.taf(fatage, "upload/report/fatage_rep.csv")
+write.taf(fatage, "report/fatage.csv")
 
 ## natage (sum, round)
-natage <- read.taf("upload/output/natage.csv")
+natage <- read.taf("output/natage.csv")
 natage$Total <- rowSums(natage[-1])
 natage <- round(natage)
-write.taf(natage, "upload/report/natage_rep.csv")
+write.taf(natage, "report/natage.csv")
 
 ## catage_fit (round)
-catage_fit <- read.taf("upload/output/catage_fit.csv")
+catage_fit <- read.taf("output/catage_fit.csv")
 catage_fit <- round(catage_fit)
-write.taf(catage_fit, "upload/report/catage_fit_rep.csv")
+write.taf(catage_fit, "report/catage_fit.csv")
 
 ## summary (round)
-summary <- read.taf("upload/output/summary.csv")
+summary <- read.taf("output/summary.csv")
 summary <- as.data.frame(mapply(round, summary, digits=c(rep(0,10),3,3,3)))
-write.taf(summary, "upload/report/summary_rep.csv")
+write.taf(summary, "report/summary.csv")
 
-## catch (multiplier, round)
-catch <- read.taf("upload/output/catch.csv")
-catch$"Catch multiplier" <- catch$"Total Removal" / catch$Catch
-catch$"Catch multiplier"[catch$"Catch multiplier"==1] <- NA
-catch <- catch[c(1:4, 6, 5)]
-write.taf(catch, "upload/report/catch_rep.csv")
+## catch_est (multiplier, round)
+catch_est <- read.taf("output/catch_est.csv")
+catch_est$"Catch multiplier" <- catch_est$"Total Removal" / catch_est$Catch
+catch_est$"Catch multiplier"[catch_est$"Catch multiplier"==1] <- NA
+catch_est <- catch_est[c(1:4, 6, 5)]
+write.taf(catch_est, "report/catch_est.csv")
 
 ## multiplier (round)
-multiplier <- read.taf("upload/output/multiplier.csv")
+multiplier <- read.taf("output/multiplier.csv")
 multiplier <- round(multiplier, 2)
-write.taf(multiplier, "upload/report/multiplier_rep.csv")
+write.taf(multiplier, "report/multiplier.csv")
