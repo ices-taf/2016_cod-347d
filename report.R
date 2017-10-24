@@ -129,6 +129,7 @@ catch_est <- read.taf("output/catch_est.csv")
 catch_est$"Catch multiplier" <- catch_est$"Total Removal" / catch_est$Catch
 catch_est$"Catch multiplier"[catch_est$"Catch multiplier"==1] <- NA
 catch_est <- catch_est[c(1:4, 6, 5)]
+catch_est <- as.data.frame(mapply(round, catch_est, digits=c(0,0,0,0,2,0)))
 write.taf(catch_est, "report/catch_est.csv")
 
 ## multiplier (round)
