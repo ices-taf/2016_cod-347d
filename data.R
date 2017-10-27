@@ -116,6 +116,20 @@ wcatch_full <- xtab2taf(catch.mean.weight.full)
 wstock_full <- xtab2taf(stock.mean.weight.full)
 maturity_full <- xtab2taf(prop.mature.full)
 
+## Rename plus group
+names(latage)[names(latage)=="6"] <- "6+"
+names(datage)[names(datage)=="6"] <- "6+"
+names(catage)[names(catage)=="6"] <- "6+"
+names(wlandings)[names(wlandings)=="6"] <- "6+"
+names(wdiscards)[names(wdiscards)=="6"] <- "6+"
+names(wcatch)[names(wcatch)=="6"] <- "6+"
+names(wstock)[names(wstock)=="6"] <- "6+"
+names(landfrac)[names(landfrac)=="6"] <- "6+"
+names(maturity)[names(maturity)=="6"] <- "6+"
+names(natmort)[names(natmort)=="6"] <- "6+"
+names(propf)[names(propf)=="6"] <- "6+"
+names(propm)[names(propm)=="6"] <- "6+"
+
 ## Write tables to data directory
 write.taf(latage, "latage.csv") # 2a
 write.taf(datage, "datage.csv") # 2b
