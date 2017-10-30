@@ -1,4 +1,4 @@
-## Preprocess data, write TAF input tables
+## Preprocess data, write TAF data tables
 
 ## Before: cn.dat, cw.dat, dw.dat, lw.dat, sw.dat, mo_raw.dat, nm.dat,
 ##         survey.dat, lf.dat, pf.dat, pm.dat (TAF database)
