@@ -20,7 +20,7 @@ latage$"11" <- rowSums(latage[as.character(11:15)])
 latage <- latage[c("Year",as.character(1:11))]
 names(latage)[ncol(latage)] <- "+gp"
 latage <- round(latage)
-latage <- tt(latage)
+latage <- tt(latage, TRUE)
 write.taf(latage, "report/latage.csv")
 
 ## datage (trim age, round, transpose)
@@ -29,7 +29,7 @@ datage$"11" <- rowSums(datage[as.character(11:15)])
 datage <- datage[c("Year",as.character(1:11))]
 names(datage)[ncol(datage)] <- "+gp"
 datage <- round(datage)
-datage <- tt(datage)
+datage <- tt(datage, TRUE)
 write.taf(datage, "report/datage.csv")
 
 ## catage (trim age, round, transpose)
@@ -38,7 +38,7 @@ catage$"11" <- rowSums(catage[as.character(11:15)])
 catage <- catage[c("Year",as.character(1:11))]
 names(catage)[ncol(catage)] <- "+gp"
 catage <- round(catage)
-catage <- tt(catage)
+catage <- tt(catage, TRUE)
 write.taf(catage, "report/catage.csv")
 
 ## wlandings (trim age, round, transpose)
@@ -50,7 +50,7 @@ wlandings$"11" <- wplus
 wlandings <- wlandings[c("Year",as.character(1:11))]
 names(wlandings)[ncol(wlandings)] <- "+gp"
 wlandings <- round(wlandings, 3)
-wlandings <- tt(wlandings)
+wlandings <- tt(wlandings, TRUE)
 write.taf(wlandings, "report/wlandings.csv")
 
 ## wdiscards (trim age, round, transpose)
@@ -62,7 +62,7 @@ wdiscards$"11" <- wplus
 wdiscards <- wdiscards[c("Year",as.character(1:11))]
 names(wdiscards)[ncol(wdiscards)] <- "+gp"
 wdiscards <- round(wdiscards, 3)
-wdiscards <- tt(wdiscards)
+wdiscards <- tt(wdiscards, TRUE)
 write.taf(wdiscards, "report/wdiscards.csv")
 
 ## wcatch (trim age, round, transpose)
@@ -74,7 +74,7 @@ wcatch$"11" <- wplus
 wcatch <- wcatch[c("Year",as.character(1:11))]
 names(wcatch)[ncol(wcatch)] <- "+gp"
 wcatch <- round(wcatch, 3)
-wcatch <- tt(wcatch)
+wcatch <- tt(wcatch, TRUE)
 write.taf(wcatch, "report/wcatch.csv")
 
 ## catch_sop (round)
