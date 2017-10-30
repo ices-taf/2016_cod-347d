@@ -129,8 +129,8 @@ write.taf(summary, "report/summary.csv")
 
 ## catch_est (multiplier, round)
 catch_est <- read.taf("output/catch_est.csv")
-names(catch_est)[names(catch_est)=="TotalRemoval"] <- "Total Removals"
-catch_est$"Catch multiplier" <- catch_est$"Total Removal" / catch_est$Catch
+names(catch_est)[names(catch_est)=="TotalRemovals"] <- "Total Removals"
+catch_est$"Catch multiplier" <- catch_est$"Total Removals" / catch_est$Catch
 catch_est$"Catch multiplier"[catch_est$"Catch multiplier"==1] <- NA
 catch_est <- catch_est[c("Year","Landings","Discards","Catch",
                          "Catch multiplier","Total Removals")]
