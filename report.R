@@ -122,7 +122,9 @@ write.taf(catage_fit, "report/catage_fit.csv")
 
 ## summary (round)
 summary <- read.taf("output/summary.csv")
-summary <- as.data.frame(mapply(round, summary, digits=c(rep(0,10),3,3,3)))
+summary <- rnd(summary, c("Rec","Rec_lo","Rec_hi","TSB","TSB_lo","TSB_hi",
+                          "SSB","SSB_lo","SSB_hi"))
+summary <- rnd(summary, c("Fbar","Fbar_lo","Fbar_hi"), 3)
 write.taf(summary, "report/summary.csv")
 
 ## catch_est (multiplier, round)
@@ -130,8 +132,10 @@ catch_est <- read.taf("output/catch_est.csv")
 names(catch_est)[names(catch_est)=="TotalRemoval"] <- "Total Removals"
 catch_est$"Catch multiplier" <- catch_est$"Total Removal" / catch_est$Catch
 catch_est$"Catch multiplier"[catch_est$"Catch multiplier"==1] <- NA
-catch_est <- catch_est[c(1:4, 6, 5)]
-catch_est <- as.data.frame(mapply(round, catch_est, digits=c(0,0,0,0,2,0)))
+catch_est <- catch_est[c("Year","Landings","Discards","Catch",
+                         "Catch multiplier","Total Removals")]
+catch_est <- rnd(catch_est, c("Landings","Discards","Catch","Total Removals"))
+catch_est <- rnd(catch_est, "Catch multiplier", 2)
 write.taf(catch_est, "report/catch_est.csv")
 
 ## multiplier (round)
