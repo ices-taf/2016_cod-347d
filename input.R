@@ -24,22 +24,27 @@ propm <- read.taf("data/propm.csv")
 natmort <- read.taf("data/natmort.csv")
 landfrac <- read.taf("data/landfrac.csv")
 
-t2m <- function(x) as.matrix(taf2xtab(x))
+taf2sam <- function(x)
+{
+  y <- as.matrix(taf2xtab(x))
+  colnames(y) <- sub("\\+", "", colnames(y))
+  y
+}
 
-surveys <- list(ibts1=t2m(ibts1), ibts3=t2m(ibts3))
+surveys <- list(ibts1=taf2sam(ibts1), ibts3=taf2sam(ibts3))
 attr(surveys$ibts1, "time") <- surveytime$ibts1
 attr(surveys$ibts3, "time") <- surveytime$ibts3
 
 ## Write the file with data prepared for state-space assessment
 input <- write.records(surveys=surveys,
-                       residual.fleet=t2m(catage),
-                       prop.mature=t2m(maturity),
-                       stock.mean.weight=t2m(wstock),
-                       catch.mean.weight=t2m(wcatch),
-                       dis.mean.weight=t2m(wdiscards),
-                       land.mean.weight=t2m(wlandings),
-                       prop.f=t2m(propf),
-                       prop.m=t2m(propm),
-                       natural.mortality=t2m(natmort),
-                       land.frac=t2m(landfrac),
+                       residual.fleet=taf2sam(catage),
+                       prop.mature=taf2sam(maturity),
+                       stock.mean.weight=taf2sam(wstock),
+                       catch.mean.weight=taf2sam(wcatch),
+                       dis.mean.weight=taf2sam(wdiscards),
+                       land.mean.weight=taf2sam(wlandings),
+                       prop.f=taf2sam(propf),
+                       prop.m=taf2sam(propm),
+                       natural.mortality=taf2sam(natmort),
+                       land.frac=taf2sam(landfrac),
                        file="input/sam.dat")
