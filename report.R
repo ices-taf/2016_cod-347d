@@ -85,6 +85,7 @@ write.taf(catch_sop, "report/catch_sop.csv")
 ## maturity (round)
 maturity <- read.taf("data/maturity.csv")
 maturity <- round(maturity, 3)
+names(maturity)[names(maturity)=="6"] <- "6+"
 write.taf(maturity, "report/maturity.csv")
 
 ## natmort (round)
@@ -126,6 +127,7 @@ write.taf(summary, "report/summary.csv")
 
 ## catch_est (multiplier, round)
 catch_est <- read.taf("output/catch_est.csv")
+names(catch_est)[names(catch_est)=="TotalRemoval"] <- "Total Removals"
 catch_est$"Catch multiplier" <- catch_est$"Total Removal" / catch_est$Catch
 catch_est$"Catch multiplier"[catch_est$"Catch multiplier"==1] <- NA
 catch_est <- catch_est[c(1:4, 6, 5)]
@@ -134,5 +136,6 @@ write.taf(catch_est, "report/catch_est.csv")
 
 ## multiplier (round)
 multiplier <- read.taf("output/multiplier.csv")
+names(multiplier)[names(multiplier)=="CatchMultiplier"] <- "Catch multiplier"
 multiplier <- round(multiplier, 2)
 write.taf(multiplier, "report/multiplier.csv")

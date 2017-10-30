@@ -78,7 +78,7 @@ tab7 <- cbind(exp(fit.current$logLand[,1]) * scale,
               exp(fit.current$logCatch[,1]) * scale,
               exp(fit.current$logCatch[,1]))
 rownames(tab7) <- yy
-colnames(tab7) <- c("Landings", "Discards", "Catch", "TotalRemoval")
+colnames(tab7) <- c("Landings", "Discards", "Catch", "TotalRemovals")
 
 ## Predicted catch at age
 sub <- fit.current$res[fit.current$res[,2]==1,c(1,3,5)]
