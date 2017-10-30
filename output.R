@@ -1,4 +1,4 @@
-## Extract model results of interest, write TAF output tables
+## Extract results of interest, write TAF output tables
 
 ## Before: confclone.log, model.cfg, sam.cor, sam.par, sam.rep, sam.res (model)
 ## After:  catage_fit.csv, catch_est.csv, fatage.csv, multiplier.csv,
@@ -59,7 +59,7 @@ if(nrow(tab4) > 0) {
                             c(rep("",ncol(tab3)-1),"+"), sep="")
     rownames(tab4) <- y
   } else { # important special case
-    colnames(tab4) <- c("Catch multiplier", "Low", "High")
+    colnames(tab4) <- c("CatchMultiplier", "Low", "High")
     rownames(tab4) <- y[key[,1]]
   }
 }
@@ -78,7 +78,7 @@ tab7 <- cbind(exp(fit.current$logLand[,1]) * scale,
               exp(fit.current$logCatch[,1]) * scale,
               exp(fit.current$logCatch[,1]))
 rownames(tab7) <- yy
-colnames(tab7) <- c("Landings", "Discards", "Catch", "Total Removal")
+colnames(tab7) <- c("Landings", "Discards", "Catch", "TotalRemoval")
 
 ## Predicted catch at age
 sub <- fit.current$res[fit.current$res[,2]==1,c(1,3,5)]
