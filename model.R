@@ -1,7 +1,7 @@
 ## Run analysis, write model results
 
 ## Before: model.cfg, sam, sam.pin (TAF database), sam.dat (input)
-## After:  confclone.org, model.cfg, sam.cor, sam.par, sam.rep, sam.res (model)
+## After:  confclone.log, model.cfg, sam.cor, sam.par, sam.rep, sam.res (model)
 
 library(icesTAF)
 
