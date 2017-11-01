@@ -24,10 +24,12 @@ R <- fit.current$R[,c(1,3,4)]
 tsb <- exp(fit.current$logtsb[,c(1,3,4)])
 ssb <- exp(fit.current$logssb[,c(1,3,4)])
 fbar <- exp(fit.current$logfbar[,c(1,3,4)])
-tab1 <- cbind(R, tsb, ssb, fbar)
-tab1[nrow(tab1),-c(7:9)] <- NA
+catch <- rbind(exp(fit.current$logCatch[,c(1,3,4)]), NA)
+tab1 <- cbind(R, tsb, ssb, catch, fbar)
 colnames(tab1) <- c("Rec", "Rec_lo", "Rec_hi", "TSB", "TSB_lo", "TSB_hi",
-                    "SSB", "SSB_lo", "SSB_hi", "Fbar", "Fbar_lo", "Fbar_hi")
+                    "SSB", "SSB_lo", "SSB_hi", "Removals", "Removals_lo",
+                    "Removals_hi", "Fbar", "Fbar_lo", "Fbar_hi")
+tab1[nrow(tab1), c("Fbar","Fbar_lo","Fbar_hi")] <- NA
 rownames(tab1) <- fit.current$years
 
 ## N table

@@ -120,11 +120,16 @@ catage_fit <- read.taf("output/catage_fit.csv")
 catage_fit <- round(catage_fit)
 write.taf(catage_fit, "report/catage_fit.csv")
 
-## summary (round)
+## summary (trim year, round)
 summary <- read.taf("output/summary.csv")
-summary <- rnd(summary, c("Rec","Rec_lo","Rec_hi","TSB","TSB_lo","TSB_hi",
-                          "SSB","SSB_lo","SSB_hi"))
-summary <- rnd(summary, c("Fbar","Fbar_lo","Fbar_hi"), 3)
+summary[nrow(summary), grep("Rec|TSB",names(summary))] <- NA
+summary <- rnd(summary, "Rec|TSB|SSB|Removals", grep=TRUE)
+summary <- rnd(summary, "Fbar", 3, grep=TRUE)
+names(summary) <- c("Year", "Recruits age 1 ('000)", "Low", "High",
+                    "TSB (tons)", "Low", "High",
+                    "SSB (tons)", "Low", "High",
+                    "Total removals (tons)", "Low", "High",
+                    "Fbar 2-4", "Low", "High")
 write.taf(summary, "report/summary.csv")
 
 ## catch_est (multiplier, round)
