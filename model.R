@@ -10,7 +10,7 @@ mkdir("model")
 url <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/run/"
 
 sam <- if(.Platform$OS.type == "unix") "sam" else "sam.exe"
-download(paste0(url,sam), "model", mode = "wb")
+download(paste0(url,sam), "model")
 download(paste0(url,"model.cfg"), "model")
 download(paste0(url,"sam.pin"), "model")
 
