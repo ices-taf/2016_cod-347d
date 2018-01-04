@@ -5,10 +5,9 @@
 ##         natage.csv, summary.csv (output)
 
 library(icesTAF)
+source("utilities_output.R", local=TRUE)
 
 mkdir("output")
-
-source("utilities_output.R")
 
 fit.current <- read.fit("model/sam")
 
