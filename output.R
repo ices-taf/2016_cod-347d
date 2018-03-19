@@ -5,7 +5,7 @@
 ##         natage.csv, summary.csv (output)
 
 library(icesTAF)
-source("utilities_output.R", local=TRUE)
+source("utilities_output.R")
 
 mkdir("output")
 

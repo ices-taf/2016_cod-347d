@@ -11,7 +11,7 @@
 
 library(icesTAF)
 suppressMessages(library(mgcv))
-source("utilities_input.R", local=TRUE)
+source("utilities_input.R")
 
 url <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/data/"
 
