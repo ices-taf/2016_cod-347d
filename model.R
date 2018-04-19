@@ -17,11 +17,11 @@ cp("input/sam.dat", "model")
 setwd("model")
 
 if (.Platform$OS.type == "unix") {
-  download(paste0(url, "sam"), "model")
+  download(paste0(url, "sam"))
   system("./sam -nr 2 -noinit")
 } else {
   winurl <- "https://github.com/ices-taf/ftp/raw/master/wgnssk/2016/cod-347d/model/"
-  download(paste0(winurl, "sam.exe"), "model")
+  download(paste0(winurl, "sam.exe"))
   system("cmd.exe", input = "sam.exe -nr 2 -noinit")
 }
 
