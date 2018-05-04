@@ -133,19 +133,19 @@ names(propm)[names(propm)=="6"] <- "6+"
 
 ## Write tables to data directory
 setwd("data")
-write.taf(latage, "latage.csv") # 2a
-write.taf(datage, "datage.csv") # 2b
-write.taf(catage, "catage.csv") # 2c
-write.taf(wlandings, "wlandings.csv") # 3a
-write.taf(wdiscards, "wdiscards.csv") # 3b
-write.taf(wcatch, "wcatch.csv")       # 3c
+write.taf(latage, "latage.csv")  # 2a
+write.taf(datage, "datage.csv")  # 2b
+write.taf(catage, "catage.csv")  # 2c
+write.taf(wlandings, "wlandings.csv")  # 3a
+write.taf(wdiscards, "wdiscards.csv")  # 3b
+write.taf(wcatch, "wcatch.csv")        # 3c
 write.taf(wstock, "wstock.csv")
-write.taf(catch_sop, "catch_sop.csv") # 4
+write.taf(catch_sop, "catch_sop.csv")  # 4
 write.taf(landfrac, "landfrac.csv")
-write.taf(maturity, "maturity.csv") # 5a
-write.taf(natmort, "natmort.csv")   # 5b
-write.taf(ibts1, "ibts1.csv") # 6a
-write.taf(ibts3, "ibts3.csv") # 6b
+write.taf(maturity, "maturity.csv")  # 5a
+write.taf(natmort, "natmort.csv")    # 5b
+write.taf(ibts1, "ibts1.csv")  # 6a
+write.taf(ibts3, "ibts3.csv")  # 6b
 write.taf(surveytime, "surveytime.csv")
 write.taf(propf, "propf.csv")
 write.taf(propm, "propm.csv")

@@ -59,7 +59,7 @@ if(nrow(tab4) > 0) {
     colnames(tab4) <- paste(1:ncol(tab3)+minAge-1,
                             c(rep("",ncol(tab3)-1),"+"), sep="")
     rownames(tab4) <- y
-  } else { # important special case
+  } else {  # important special case
     colnames(tab4) <- c("CatchMultiplier", "Low", "High")
     rownames(tab4) <- y[key[,1]]
   }
@@ -99,9 +99,9 @@ catch_est <- xtab2taf(tab7)
 catage_fit <- xtab2taf(tab8)
 
 ## Write tables to output directory
-write.taf(fatage, "output/fatage.csv") # 8
-write.taf(natage, "output/natage.csv") # 9
-write.taf(catage_fit, "output/catage_fit.csv") # 10
-write.taf(summary, "output/summary.csv")       # 11a
-write.taf(catch_est, "output/catch_est.csv")   # 11b
-write.taf(multiplier, "output/multiplier.csv") # 11c
+write.taf(fatage, "output/fatage.csv")  # 8
+write.taf(natage, "output/natage.csv")  # 9
+write.taf(catage_fit, "output/catage_fit.csv")  # 10
+write.taf(summary, "output/summary.csv")        # 11a
+write.taf(catch_est, "output/catch_est.csv")    # 11b
+write.taf(multiplier, "output/multiplier.csv")  # 11c
