@@ -1,7 +1,7 @@
 ## Preprocess data, write TAF data tables
 
 ## Before: cn.dat, cw.dat, dw.dat, lw.dat, sw.dat, mo_raw.dat, nm.dat,
-##         survey.dat, lf.dat, pf.dat, pm.dat (TAF database)
+##         survey.dat, lf.dat, pf.dat, pm.dat (begin/data)
 ## After:  catage.csv, catage_full.csv, catch_sop.csv, datage.csv,
 ##         datage_full.csv, ibts1.csv, ibts3.csv, landfrac.csv, latage.csv,
 ##         latage_full.csv, maturity.csv, maturity_full.csv, natmort.csv,
@@ -9,28 +9,29 @@
 ##         wdiscards_full.csv, wlandings.csv, wlandings_full.csv, wstock.csv,
 ##         wstock_full.csv (data)
 
+## SAO repository: nscod16-ass02
+
 library(icesTAF)
 suppressMessages(library(mgcv))
 source("utilities_input.R")
 
-url <- "https://stockassessment.org/datadisk/stockassessment/userdirs/user3/nscod16-ass02/data/"
-
 mkdir("data")
 
 ## Get data
-setwd("data")
-catch.no <- read.ices(paste0(url, "cn.dat"))
-catch.mean.weight <- read.ices(paste0(url, "cw.dat"))
-dis.mean.weight <- read.ices(paste0(url, "dw.dat"))
-land.mean.weight <- read.ices(paste0(url, "lw.dat"))
-stock.mean.weight <- read.ices(paste0(url, "sw.dat"))
-prop.mature <- read.ices(paste0(url, "mo_raw.dat"))
-natural.mortality <- read.ices(paste0(url, "nm.dat"))
-surveys <- read.surveys(paste0(url, "survey.dat"))
-land.no <- read.ices(paste0(url, "lf.dat"))
+setwd("begin/data")
+catch.no <- read.ices("cn.dat")
+catch.mean.weight <- read.ices("cw.dat")
+dis.mean.weight <- read.ices("dw.dat")
+land.mean.weight <- read.ices("lw.dat")
+stock.mean.weight <- read.ices("sw.dat")
+prop.mature <- read.ices("mo_raw.dat")
+natural.mortality <- read.ices("nm.dat")
+surveys <- read.surveys("survey.dat")
+land.no <- read.ices("lf.dat")
 dis.no <- catch.no - land.no
-prop.f <- read.ices(paste0(url, "pf.dat"))
-prop.m <- read.ices(paste0(url, "pm.dat"))
+prop.f <- read.ices("pf.dat")
+prop.m <- read.ices("pm.dat")
+setwd("../..")
 ## full datasets, including all ages
 catch.no.full <- catch.no
 land.no.full <- land.no
@@ -131,6 +132,7 @@ names(propf)[names(propf)=="6"] <- "6+"
 names(propm)[names(propm)=="6"] <- "6+"
 
 ## Write tables to data directory
+setwd("data")
 write.taf(latage, "latage.csv") # 2a
 write.taf(datage, "datage.csv") # 2b
 write.taf(catage, "catage.csv") # 2c
