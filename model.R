@@ -8,7 +8,7 @@ library(icesTAF)
 mkdir("model")
 
 sam <- if(.Platform$OS.type == "unix") "sam" else "sam.exe"
-cp(paste0("begin/model/",sam), "model")
+cp(file.path("begin/model",sam), "model")
 cp("begin/model/model.cfg", "model")
 cp("begin/model/sam.pin", "model")
 
