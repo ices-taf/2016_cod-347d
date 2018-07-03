@@ -1,7 +1,7 @@
 ## Preprocess data, write TAF data tables
 
 ## Before: cn.dat, cw.dat, dw.dat, lw.dat, sw.dat, mo_raw.dat, nm.dat,
-##         survey.dat, lf.dat, pf.dat, pm.dat (begin/data)
+##         survey.dat, lf.dat, pf.dat, pm.dat (begin/initial/data)
 ## After:  catage.csv, catage_full.csv, catch_sop.csv, datage.csv,
 ##         datage_full.csv, ibts1.csv, ibts3.csv, landfrac.csv, latage.csv,
 ##         latage_full.csv, maturity.csv, maturity_full.csv, natmort.csv,
@@ -18,7 +18,7 @@ source("utilities_input.R")
 mkdir("data")
 
 ## Get data
-setwd("begin/data")
+setwd("begin/initial/data")
 catch.no <- read.ices("cn.dat")
 catch.mean.weight <- read.ices("cw.dat")
 dis.mean.weight <- read.ices("dw.dat")
@@ -31,7 +31,7 @@ land.no <- read.ices("lf.dat")
 dis.no <- catch.no - land.no
 prop.f <- read.ices("pf.dat")
 prop.m <- read.ices("pm.dat")
-setwd("../..")
+setwd("../../..")
 ## full datasets, including all ages
 catch.no.full <- catch.no
 land.no.full <- land.no
