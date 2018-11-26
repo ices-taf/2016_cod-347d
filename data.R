@@ -13,7 +13,7 @@
 
 library(icesTAF)
 suppressMessages(library(mgcv))
-source("utilities_input.R")
+source("utilities_data.R")
 
 mkdir("data")
 
