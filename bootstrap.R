@@ -12,6 +12,8 @@ cp("initial/config", ".")
 datasets <- bibtex::read.bib("DATA.bib")
 for(dat in datasets)
 {
+  if(dat$source == "file")
+    dat$source <- file.path("initial/data", attr(dat,"key"))
   cp(dat$source, "data")
 }
 
