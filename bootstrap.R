@@ -12,9 +12,9 @@ cp("initial/config", ".")
 datasets <- bibtex::read.bib("DATA.bib")
 for(dat in datasets)
 {
-  if(grepl("^http", soft$source))
+  if(grepl("^http", dat$source))
   {
-    download(soft$source, dir="data")
+    download(dat$source, dir="data")
   }
   else
   {
