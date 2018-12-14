@@ -12,9 +12,16 @@ cp("initial/config", ".")
 datasets <- bibtex::read.bib("DATA.bib")
 for(dat in datasets)
 {
-  if(dat$source == "file")
-    dat$source <- file.path("initial/data", attr(dat,"key"))
-  cp(dat$source, "data")
+  if(grepl("^http", soft$source))
+  {
+    download(soft$source, dir="data")
+  }
+  else
+  {
+    if(dat$source == "file")
+      dat$source <- file.path("initial/data", attr(dat,"key"))
+    cp(dat$source, "data")
+  }
 }
 
 ## Process software
