@@ -5,9 +5,9 @@
 ## After:  catage.csv, catage_full.csv, catch_sop.csv, datage.csv,
 ##         datage_full.csv, ibts1.csv, ibts3.csv, landfrac.csv, latage.csv,
 ##         latage_full.csv, maturity.csv, maturity_full.csv, natmort.csv,
-##         propf.csv, propm.csv, surveytime.csv, wcatch.csv, wcatch_full.csv,
-##         wdiscards.csv, wdiscards_full.csv, wlandings.csv, wlandings_full.csv,
-##         wstock.csv, wstock_full.csv (data)
+##         propf.csv, propm.csv, sam.dat, surveytime.csv, wcatch.csv,
+##         wcatch_full.csv, wdiscards.csv, wdiscards_full.csv, wlandings.csv,
+##         wlandings_full.csv, wstock.csv, wstock_full.csv (data)
 
 library(icesTAF)
 suppressMessages(library(mgcv))
@@ -157,3 +157,26 @@ write.taf(wcatch_full)
 write.taf(wstock_full)
 write.taf(maturity_full)
 setwd("..")
+
+## Prepare model input file
+taf2sam <- function(x)
+{
+  y <- as.matrix(taf2xtab(x))
+  colnames(y) <- sub("\\+", "", colnames(y))
+  y
+}
+surveys <- list(ibts1=taf2sam(ibts1), ibts3=taf2sam(ibts3))
+attr(surveys$ibts1, "time") <- surveytime$ibts1
+attr(surveys$ibts3, "time") <- surveytime$ibts3
+input <- write.records(surveys=surveys,
+                       residual.fleet=taf2sam(catage),
+                       prop.mature=taf2sam(maturity),
+                       stock.mean.weight=taf2sam(wstock),
+                       catch.mean.weight=taf2sam(wcatch),
+                       dis.mean.weight=taf2sam(wdiscards),
+                       land.mean.weight=taf2sam(wlandings),
+                       prop.f=taf2sam(propf),
+                       prop.m=taf2sam(propm),
+                       natural.mortality=taf2sam(natmort),
+                       land.frac=taf2sam(landfrac),
+                       file="data/sam.dat")
