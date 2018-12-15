@@ -1,15 +1,13 @@
 ## Preprocess data, write TAF data tables
 
-## Before: cn.dat, cw.dat, dw.dat, lw.dat, sw.dat, mo_raw.dat, nm.dat,
-##         survey.dat, lf.dat, pf.dat, pm.dat (begin/initial/data)
+## Before: cn.dat, cw.dat, dw.dat, lf.dat, lw.dat, mo_raw.dat, nm.dat, pf.dat,
+##         pm.dat, survey.dat, sw.dat (bootstrap/data)
 ## After:  catage.csv, catage_full.csv, catch_sop.csv, datage.csv,
 ##         datage_full.csv, ibts1.csv, ibts3.csv, landfrac.csv, latage.csv,
 ##         latage_full.csv, maturity.csv, maturity_full.csv, natmort.csv,
-##         propf.csv, propm.csv, wcatch.csv, wcatch_full.csv, wdiscards.csv,
-##         wdiscards_full.csv, wlandings.csv, wlandings_full.csv, wstock.csv,
-##         wstock_full.csv (data)
-
-## SAO repository: nscod16-ass02
+##         propf.csv, propm.csv, surveytime.csv, wcatch.csv, wcatch_full.csv,
+##         wdiscards.csv, wdiscards_full.csv, wlandings.csv, wlandings_full.csv,
+##         wstock.csv, wstock_full.csv (data)
 
 library(icesTAF)
 suppressMessages(library(mgcv))
@@ -18,7 +16,7 @@ source("utilities_data.R")
 mkdir("data")
 
 ## Get data
-setwd("begin/initial/data")
+setwd("bootstrap/data")
 catch.no <- read.ices("cn.dat")
 catch.mean.weight <- read.ices("cw.dat")
 dis.mean.weight <- read.ices("dw.dat")
@@ -31,7 +29,7 @@ land.no <- read.ices("lf.dat")
 dis.no <- catch.no - land.no
 prop.f <- read.ices("pf.dat")
 prop.m <- read.ices("pm.dat")
-setwd("../../..")
+setwd("../..")
 ## full datasets, including all ages
 catch.no.full <- catch.no
 land.no.full <- land.no
@@ -118,44 +116,44 @@ wstock_full <- xtab2taf(stock.mean.weight.full)
 maturity_full <- xtab2taf(prop.mature.full)
 
 ## Rename plus group
-names(latage)[names(latage)=="6"] <- "6+"
-names(datage)[names(datage)=="6"] <- "6+"
-names(catage)[names(catage)=="6"] <- "6+"
-names(wlandings)[names(wlandings)=="6"] <- "6+"
-names(wdiscards)[names(wdiscards)=="6"] <- "6+"
-names(wcatch)[names(wcatch)=="6"] <- "6+"
-names(wstock)[names(wstock)=="6"] <- "6+"
-names(landfrac)[names(landfrac)=="6"] <- "6+"
-names(maturity)[names(maturity)=="6"] <- "6+"
-names(natmort)[names(natmort)=="6"] <- "6+"
-names(propf)[names(propf)=="6"] <- "6+"
-names(propm)[names(propm)=="6"] <- "6+"
+latage <- plus(latage)
+datage <- plus(datage)
+catage <- plus(catage)
+wlandings <- plus(wlandings)
+wdiscards <- plus(wdiscards)
+wcatch <- plus(wcatch)
+wstock <- plus(wstock)
+landfrac <- plus(landfrac)
+maturity <- plus(maturity)
+natmort <- plus(natmort)
+propf <- plus(propf)
+propm <- plus(propm)
 
 ## Write tables to data directory
 setwd("data")
-write.taf(latage, "latage.csv")  # 2a
-write.taf(datage, "datage.csv")  # 2b
-write.taf(catage, "catage.csv")  # 2c
-write.taf(wlandings, "wlandings.csv")  # 3a
-write.taf(wdiscards, "wdiscards.csv")  # 3b
-write.taf(wcatch, "wcatch.csv")        # 3c
-write.taf(wstock, "wstock.csv")
-write.taf(catch_sop, "catch_sop.csv")  # 4
-write.taf(landfrac, "landfrac.csv")
-write.taf(maturity, "maturity.csv")  # 5a
-write.taf(natmort, "natmort.csv")    # 5b
-write.taf(ibts1, "ibts1.csv")  # 6a
-write.taf(ibts3, "ibts3.csv")  # 6b
-write.taf(surveytime, "surveytime.csv")
-write.taf(propf, "propf.csv")
-write.taf(propm, "propm.csv")
+write.taf(latage)     # 2a
+write.taf(datage)     # 2b
+write.taf(catage)     # 2c
+write.taf(wlandings)  # 3a
+write.taf(wdiscards)  # 3b
+write.taf(wcatch)     # 3c
+write.taf(wstock)
+write.taf(catch_sop)  # 4
+write.taf(landfrac)
+write.taf(maturity)   # 5a
+write.taf(natmort)    # 5b
+write.taf(ibts1)      # 6a
+write.taf(ibts3)      # 6b
+write.taf(surveytime)
+write.taf(propf)
+write.taf(propm)
 ## full datasets, including all ages
-write.taf(latage_full, "latage_full.csv")
-write.taf(datage_full, "datage_full.csv")
-write.taf(catage_full, "catage_full.csv")
-write.taf(wlandings_full, "wlandings_full.csv")
-write.taf(wdiscards_full, "wdiscards_full.csv")
-write.taf(wcatch_full, "wcatch_full.csv")
-write.taf(wstock_full, "wstock_full.csv")
-write.taf(maturity_full, "maturity_full.csv")
+write.taf(latage_full)
+write.taf(datage_full)
+write.taf(catage_full)
+write.taf(wlandings_full)
+write.taf(wdiscards_full)
+write.taf(wcatch_full)
+write.taf(wstock_full)
+write.taf(maturity_full)
 setwd("..")
