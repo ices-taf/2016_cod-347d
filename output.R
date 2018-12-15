@@ -99,9 +99,11 @@ catch_est <- xtab2taf(tab7)
 catage_fit <- xtab2taf(tab8)
 
 ## Write tables to output directory
-write.taf(fatage, "output/fatage.csv")  # 8
-write.taf(natage, "output/natage.csv")  # 9
-write.taf(catage_fit, "output/catage_fit.csv")  # 10
-write.taf(summary, "output/summary.csv")        # 11a
-write.taf(catch_est, "output/catch_est.csv")    # 11b
-write.taf(multiplier, "output/multiplier.csv")  # 11c
+setwd("output")
+write.taf(fatage)      # 8
+write.taf(natage)      # 9
+write.taf(catage_fit)  # 10
+write.taf(summary)     # 11a
+write.taf(catch_est)   # 11b
+write.taf(multiplier)  # 11c
+setwd("..")
