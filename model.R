@@ -9,7 +9,7 @@ library(icesTAF)
 mkdir("model")
 
 ## Get model executable
-exefile <- if(os.unix()) "sam" else "sam.exe"
+exefile <- if(os.linux()) "sam" else "sam.exe"
 taf.unzip("bootstrap/software/sam.zip", files=exefile, exdir="model")
 
 ## Get model configuration
