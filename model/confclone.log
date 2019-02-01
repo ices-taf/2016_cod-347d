@@ -1,0 +1,52 @@
+minAge =
+1
+maxAge =
+6
+maxAgePlusGroup =
+1
+keyLogFsta =
+ 1 2 3 4 5 6
+ 0 0 0 0 0 0
+ 0 0 0 0 0 0
+corFlag =
+2
+keyLogFpar =
+ 0 0 0 0 0 0
+ 1 2 3 4 5 0
+ 6 7 8 9 0 0
+keyQpow =
+ 0 0 0 0 0 0
+ 0 0 0 0 0 0
+ 0 0 0 0 0 0
+keyVarF =
+ 1 2 2 2 2 2
+ 0 0 0 0 0 0
+ 0 0 0 0 0 0
+keyVarLogN =
+ 1 2 2 2 2 2
+keyVarObs =
+ 1 2 3 3 3 3
+ 4 5 5 5 5 0
+ 6 7 7 7 0 0
+stockRecruitmentModelCode =
+0
+noScaledYears =
+13
+keyScaledYears =
+ 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005
+keyParScaledYA =
+ 1 1 1 1 1 1
+ 2 2 2 2 2 2
+ 3 3 3 3 3 3
+ 4 4 4 4 4 4
+ 5 5 5 5 5 5
+ 6 6 6 6 6 6
+ 7 7 7 7 7 7
+ 8 8 8 8 8 8
+ 9 9 9 9 9 9
+ 10 10 10 10 10 10
+ 11 11 11 11 11 11
+ 12 12 12 12 12 12
+ 13 13 13 13 13 13
+fbarRange =
+ 2 4
