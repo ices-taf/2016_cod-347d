@@ -3,7 +3,7 @@
 
 ## How to run
 
-Install the icesTAF package, version >=2.1 from GitHub.
+Install the icesTAF package, version >=2.1 from CRAN.
 
 Then open R in the `2016_cod-347d` directory and run:
 
