@@ -1,10 +1,10 @@
-Started analysis @ 20:35:53, 07 March 2019
+Started analysis @ 14:51:28, 21 March 2019
 running
-  'D:\programs\R\R-3.5.2\bin\x64\Rterm.exe --slave --no-restore -e icesTAF::sourceAll()'
+  '..LocalRinstallation..\x64\Rterm.exe --slave --no-restore -e icesTAF::sourceAll();warnings()'
 
-[20:35:54] data.R running...
-[20:35:56]   data.R done
-[20:35:56] model.R running...
+[14:51:28] data.R running...
+[14:51:31]   data.R done
+[14:51:31] model.R running...
 SAM State-space Assessment Model
 More info at: http://www.stockassessment.org
 --------------------------------
@@ -1170,8 +1170,8 @@ Newton raphson 2   f = -1167.294600836696 max g = 9.761080832504376e-013
  f = -1167.294598613564 max g = 0.0009356636178008415
 Newton raphson 1   f = -1167.294598637634 max g = 1.468841492879847e-008
 Newton raphson 2   f = -1167.294598637634 max g = 1.111555292254707e-012
-[20:43:02]   model.R done
-[20:43:02] output.R running...
-[20:43:04]   output.R done
-[20:43:04] report.R running...
-[20:43:04]   report.R done
+[14:58:29]   model.R done
+[14:58:29] output.R running...
+[14:58:31]   output.R done
+[14:58:31] report.R running...
+[14:58:31]   report.R done
