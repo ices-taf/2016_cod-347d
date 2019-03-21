@@ -85,7 +85,6 @@ write.taf(catch_sop, "report/catch_sop.csv")
 ## maturity (round)
 maturity <- read.taf("data/maturity.csv")
 maturity <- round(maturity, 3)
-names(maturity)[names(maturity)=="6"] <- "6+"
 write.taf(maturity, "report/maturity.csv")
 
 ## natmort (round)
