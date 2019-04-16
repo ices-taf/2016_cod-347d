@@ -10,7 +10,7 @@ mkdir("model")
 
 ## Get model executable
 exefile <- if(os.linux()) "sam" else "sam.exe"
-taf.unzip("bootstrap/software/sam.zip", files=exefile, exdir="model")
+cp(file.path("bootstrap/software/sam", exefile), "model")
 
 ## Get model configuration
 cp("bootstrap/config/*", "model")
