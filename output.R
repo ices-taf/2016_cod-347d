@@ -95,15 +95,15 @@ summary <- xtab2taf(tab1)
 natage <- xtab2taf(tab2)
 fatage <- xtab2taf(tab3)
 multiplier <- xtab2taf(tab4)
-catch_est <- xtab2taf(tab7)
-catage_fit <- xtab2taf(tab8)
+catch.est <- xtab2taf(tab7)
+catage.fit <- xtab2taf(tab8)
 
 ## Write tables to output directory
 setwd("output")
 write.taf(fatage)      # 8
 write.taf(natage)      # 9
-write.taf(catage_fit)  # 10
+write.taf(catage.fit)  # 10
 write.taf(summary)     # 11a
-write.taf(catch_est)   # 11b
+write.taf(catch.est)   # 11b
 write.taf(multiplier)  # 11c
 setwd("..")
