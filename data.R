@@ -1,7 +1,7 @@
 ## Preprocess data, write TAF data tables
 
 ## Before: cn.dat, cw.dat, dw.dat, lf.dat, lw.dat, mo_raw.dat, nm.dat, pf.dat,
-##         pm.dat, survey.dat, sw.dat (bootstrap/data)
+##         pm.dat, survey.dat, sw.dat (boot/data)
 ## After:  catage.csv, catage_full.csv, catch_sop.csv, datage.csv,
 ##         datage_full.csv, ibts1.csv, ibts3.csv, landfrac.csv, latage.csv,
 ##         latage_full.csv, maturity.csv, maturity_full.csv, natmort.csv,
@@ -16,7 +16,7 @@ source("utilities_data.R")
 mkdir("data")
 
 ## Get data
-setwd("bootstrap/data")
+setwd("boot/data")
 catch.no <- read.ices("cn.dat")
 catch.mean.weight <- read.ices("cw.dat")
 dis.mean.weight <- read.ices("dw.dat")
