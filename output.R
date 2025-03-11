@@ -91,19 +91,17 @@ colnames(tab8) <- paste(1:ncol(tab8)+minAge-1, c(rep("",ncol(tab8)-1),"+"),
                         sep="")
 
 ## Prepare tables for export
-summary <- xtab2taf(tab1)
-natage <- xtab2taf(tab2)
+catage.fit <- xtab2taf(tab8)
+catch.est <- xtab2taf(tab7)
 fatage <- xtab2taf(tab3)
 multiplier <- xtab2taf(tab4)
-catch.est <- xtab2taf(tab7)
-catage.fit <- xtab2taf(tab8)
+natage <- xtab2taf(tab2)
+summary <- xtab2taf(tab1)
 
 ## Write tables to output directory
-setwd("output")
-write.taf(fatage)      # 8
-write.taf(natage)      # 9
-write.taf(catage.fit)  # 10
-write.taf(summary)     # 11a
-write.taf(catch.est)   # 11b
-write.taf(multiplier)  # 11c
-setwd("..")
+write.taf(catage.fit, dir="output")
+write.taf(catch.est, dir="output")
+write.taf(fatage, dir="output")
+write.taf(multiplier, dir="output")
+write.taf(natage, dir="output")
+write.taf(summary, dir="output")

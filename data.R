@@ -16,20 +16,18 @@ source("utilities_data.R")
 mkdir("data")
 
 ## Get data
-setwd("boot/data")
-catch.no <- read.ices("cn.dat")
-catch.mean.weight <- read.ices("cw.dat")
-dis.mean.weight <- read.ices("dw.dat")
-land.mean.weight <- read.ices("lw.dat")
-stock.mean.weight <- read.ices("sw.dat")
-prop.mature <- read.ices("mo_raw.dat")
-natural.mortality <- read.ices("nm.dat")
-surveys <- read.surveys("survey.dat")
-land.no <- read.ices("lf.dat")
+catch.no <- read.ices("boot/data/cn.dat")
+catch.mean.weight <- read.ices("boot/data/cw.dat")
+dis.mean.weight <- read.ices("boot/data/dw.dat")
+land.mean.weight <- read.ices("boot/data/lw.dat")
+stock.mean.weight <- read.ices("boot/data/sw.dat")
+prop.mature <- read.ices("boot/data/mo_raw.dat")
+natural.mortality <- read.ices("boot/data/nm.dat")
+surveys <- read.surveys("boot/data/survey.dat")
+land.no <- read.ices("boot/data/lf.dat")
 dis.no <- catch.no - land.no
-prop.f <- read.ices("pf.dat")
-prop.m <- read.ices("pm.dat")
-setwd("../..")
+prop.f <- read.ices("boot/data/pf.dat")
+prop.m <- read.ices("boot/data/pm.dat")
 ## full datasets, including all ages
 catch.no.full <- catch.no
 land.no.full <- land.no
@@ -130,33 +128,31 @@ propf <- plus(propf)
 propm <- plus(propm)
 
 ## Write tables to data directory
-setwd("data")
-write.taf(latage)     # 2a
-write.taf(datage)     # 2b
-write.taf(catage)     # 2c
-write.taf(wlandings)  # 3a
-write.taf(wdiscards)  # 3b
-write.taf(wcatch)     # 3c
-write.taf(wstock)
-write.taf(catch_sop)  # 4
-write.taf(landfrac)
-write.taf(maturity)   # 5a
-write.taf(natmort)    # 5b
-write.taf(ibts1)      # 6a
-write.taf(ibts3)      # 6b
-write.taf(surveytime)
-write.taf(propf)
-write.taf(propm)
+write.taf(catage, dir="data")
+write.taf(catch_sop, dir="data")
+write.taf(datage, dir="data")
+write.taf(ibts1, dir="data")
+write.taf(ibts3, dir="data")
+write.taf(landfrac, dir="data")
+write.taf(latage, dir="data")
+write.taf(maturity, dir="data")
+write.taf(natmort, dir="data")
+write.taf(propf, dir="data")
+write.taf(propm, dir="data")
+write.taf(surveytime, dir="data")
+write.taf(wcatch, dir="data")
+write.taf(wdiscards, dir="data")
+write.taf(wlandings, dir="data")
+write.taf(wstock, dir="data")
 ## full datasets, including all ages
-write.taf(latage_full)
-write.taf(datage_full)
-write.taf(catage_full)
-write.taf(wlandings_full)
-write.taf(wdiscards_full)
-write.taf(wcatch_full)
-write.taf(wstock_full)
-write.taf(maturity_full)
-setwd("..")
+write.taf(catage_full, dir="data")
+write.taf(datage_full, dir="data")
+write.taf(latage_full, dir="data")
+write.taf(maturity_full, dir="data")
+write.taf(wcatch_full, dir="data")
+write.taf(wdiscards_full, dir="data")
+write.taf(wlandings_full, dir="data")
+write.taf(wstock_full, dir="data")
 
 ## Prepare model input file
 taf2sam <- function(x)
