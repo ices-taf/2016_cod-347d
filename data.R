@@ -1,13 +1,13 @@
-## Preprocess data, write TAF data tables
+# Preprocess data, write TAF data tables
 
-## Before: cn.dat, cw.dat, dw.dat, lf.dat, lw.dat, mo_raw.dat, nm.dat, pf.dat,
-##         pm.dat, survey.dat, sw.dat (boot/data)
-## After:  catage.csv, catage_full.csv, catch_sop.csv, datage.csv,
-##         datage_full.csv, ibts1.csv, ibts3.csv, landfrac.csv, latage.csv,
-##         latage_full.csv, maturity.csv, maturity_full.csv, natmort.csv,
-##         propf.csv, propm.csv, sam.dat, surveytime.csv, wcatch.csv,
-##         wcatch_full.csv, wdiscards.csv, wdiscards_full.csv, wlandings.csv,
-##         wlandings_full.csv, wstock.csv, wstock_full.csv (data)
+# Before: cn.dat, cw.dat, dw.dat, lf.dat, lw.dat, mo_raw.dat, nm.dat, pf.dat,
+#         pm.dat, survey.dat, sw.dat (boot/data)
+# After:  catage.csv, catage_full.csv, catch_sop.csv, datage.csv,
+#         datage_full.csv, ibts1.csv, ibts3.csv, landfrac.csv, latage.csv,
+#         latage_full.csv, maturity.csv, maturity_full.csv, natmort.csv,
+#         propf.csv, propm.csv, sam.dat, surveytime.csv, wcatch.csv,
+#         wcatch_full.csv, wdiscards.csv, wdiscards_full.csv, wlandings.csv,
+#         wlandings_full.csv, wstock.csv, wstock_full.csv (data)
 
 library(icesTAF)
 suppressMessages(library(mgcv))
@@ -15,7 +15,7 @@ source("utilities_data.R")
 
 mkdir("data")
 
-## Get data
+# Get data
 catch.no <- read.ices("boot/data/cn.dat")
 catch.mean.weight <- read.ices("boot/data/cw.dat")
 dis.mean.weight <- read.ices("boot/data/dw.dat")
@@ -28,7 +28,7 @@ land.no <- read.ices("boot/data/lf.dat")
 dis.no <- catch.no - land.no
 prop.f <- read.ices("boot/data/pf.dat")
 prop.m <- read.ices("boot/data/pm.dat")
-## full datasets, including all ages
+# full datasets, including all ages
 catch.no.full <- catch.no
 land.no.full <- land.no
 land.mean.weight.full <- land.mean.weight
@@ -36,7 +36,7 @@ dis.mean.weight.full <- dis.mean.weight
 catch.mean.weight.full <- catch.mean.weight
 stock.mean.weight.full <- stock.mean.weight
 
-## Smooth maturity
+# Smooth maturity
 skipYears <- c(1:10, 54)
 columnsToSmooth <- 1:5
 mo <- prop.mature[-c(skipYears),]
@@ -50,7 +50,7 @@ prop.mature[-c(skipYears),] <- mo
 prop.mature[54,] <- prop.mature[53,]
 prop.mature.full <- prop.mature
 
-## Modify to 6+ data
+# Modify to 6+ data
 cutage <- 6
 low <- 1
 GE <- which(as.numeric(colnames(catch.no)) >= cutage)
@@ -79,13 +79,13 @@ land.frac <- ifelse(catch.no>0, land.no/catch.no, 1)
 prop.f <- prop.f[,low:E]
 prop.m <- prop.m[,low:E]
 
-## Catch as sum of products
+# Catch as sum of products
 sop <- data.frame(Landings=rowSums(land.no * land.mean.weight),
                   Discards=rowSums((catch.no-land.no) * dis.mean.weight))
 sop$Catch <- sop$Landings + sop$Discards
-## sop$Catch2 <- rowSums(catch.no * catch.mean.weight)
+# sop$Catch2 <- rowSums(catch.no * catch.mean.weight)
 
-## Prepare tables for export
+# Prepare tables for export
 latage <- xtab2taf(land.no)
 datage <- xtab2taf(catch.no - land.no)
 catage <- xtab2taf(catch.no)
@@ -103,7 +103,7 @@ catch_sop <- xtab2taf(sop)
 landfrac <- xtab2taf(land.frac)
 propf <- xtab2taf(prop.f)
 propm <- xtab2taf(prop.m)
-## full datasets, including all ages
+# full datasets, including all ages
 latage_full <- xtab2taf(land.no.full)
 datage_full <- xtab2taf(catch.no.full - land.no.full)
 catage_full <- xtab2taf(catch.no.full)
@@ -113,7 +113,7 @@ wcatch_full <- xtab2taf(catch.mean.weight.full)
 wstock_full <- xtab2taf(stock.mean.weight.full)
 maturity_full <- xtab2taf(prop.mature.full)
 
-## Rename plus group
+# Rename plus group
 latage <- plus(latage)
 datage <- plus(datage)
 catage <- plus(catage)
@@ -127,7 +127,7 @@ natmort <- plus(natmort)
 propf <- plus(propf)
 propm <- plus(propm)
 
-## Write tables to data directory
+# Write tables to data directory
 write.taf(catage, dir="data")
 write.taf(catch_sop, dir="data")
 write.taf(datage, dir="data")
@@ -144,7 +144,7 @@ write.taf(wcatch, dir="data")
 write.taf(wdiscards, dir="data")
 write.taf(wlandings, dir="data")
 write.taf(wstock, dir="data")
-## full datasets, including all ages
+# full datasets, including all ages
 write.taf(catage_full, dir="data")
 write.taf(datage_full, dir="data")
 write.taf(latage_full, dir="data")
@@ -154,7 +154,7 @@ write.taf(wdiscards_full, dir="data")
 write.taf(wlandings_full, dir="data")
 write.taf(wstock_full, dir="data")
 
-## Prepare model input file
+# Prepare model input file
 taf2sam <- function(x)
 {
   y <- as.matrix(taf2xtab(x))

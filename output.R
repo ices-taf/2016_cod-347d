@@ -1,8 +1,8 @@
-## Extract results of interest, write TAF output tables
+# Extract results of interest, write TAF output tables
 
-## Before: confclone.log, model.cfg, sam.cor, sam.par, sam.rep, sam.res (model)
-## After:  catage_fit.csv, catch_est.csv, fatage.csv, multiplier.csv,
-##         natage.csv, summary.csv (output)
+# Before: confclone.log, model.cfg, sam.cor, sam.par, sam.rep, sam.res (model)
+# After:  catage_fit.csv, catch_est.csv, fatage.csv, multiplier.csv,
+#         natage.csv, summary.csv (output)
 
 library(icesTAF)
 source("utilities_output.R")
@@ -11,14 +11,14 @@ mkdir("output")
 
 fit.current <- read.fit("model/sam")
 
-## Figure out a few basics
+# Figure out a few basics
 minAge <- min(fit.current$res[,3])
 maxAge <- max(fit.current$res[,3])
 noN <- maxAge - minAge + 1
 conffile <- "model/model.cfg"
 range.fbar <- fit.current$keys$fbarRange
 
-## Summary table
+# Summary table
 R <- fit.current$R[,c(1,3,4)]
 tsb <- exp(fit.current$logtsb[,c(1,3,4)])
 ssb <- exp(fit.current$logssb[,c(1,3,4)])
@@ -31,19 +31,19 @@ colnames(tab1) <- c("Rec", "Rec_lo", "Rec_hi", "TSB", "TSB_lo", "TSB_hi",
 tab1[nrow(tab1), c("Fbar","Fbar_lo","Fbar_hi")] <- NA
 rownames(tab1) <- fit.current$years
 
-## N table
+# N table
 tab2 <- exp(fit.current$stateEst[,1:noN])
 rownames(tab2) <- fit.current$years
 colnames(tab2) <- paste(1:noN+minAge-1, c(rep("",noN-1),"+"), sep="")
 
-## F table
+# F table
 tab3 <- exp(fit.current$stateEst[,-c(1:noN)])
 tab3 <- tab3[-nrow(tab3),]
 rownames(tab3) <- fit.current$years[1:nrow(tab3)]
 colnames(tab3) <- paste(1:ncol(tab3)+minAge-1, c(rep("",ncol(tab3)-1),"+"),
                         sep="")
 
-## Scale table
+# Scale table
 tab4 <- exp(fit.current$logscale[,c(1,3,4)])
 if(nrow(tab4) > 0) {
   idx1 <- grep("Years in which catch data are to be scaled",
@@ -65,10 +65,10 @@ if(nrow(tab4) > 0) {
   }
 }
 
-## Catch table
+# Catch table
 yy <- fit.current$years[-length(fit.current$years)]
 scale <- rep(1, length(yy))
-## get catch scaling
+# get catch scaling
 phi <- 1 / rowMeans(exp(matrix(
              fit.current$logscale[fit.current$keys$keyParScaledYA],
              nrow=fit.current$keys$noScaledYears)))
@@ -81,7 +81,7 @@ tab7 <- cbind(exp(fit.current$logLand[,1]) * scale,
 rownames(tab7) <- yy
 colnames(tab7) <- c("Landings", "Discards", "Catch", "TotalRemovals")
 
-## Predicted catch at age
+# Predicted catch at age
 sub <- fit.current$res[fit.current$res[,2]==1,c(1,3,5)]
 names(sub) <- c("year", "age", "logPred")
 mat <- reshape(sub, idvar="year", timevar="age", direction="wide")
@@ -90,7 +90,7 @@ tab8 <- exp(mat[,-1])
 colnames(tab8) <- paste(1:ncol(tab8)+minAge-1, c(rep("",ncol(tab8)-1),"+"),
                         sep="")
 
-## Prepare tables for export
+# Prepare tables for export
 catage.fit <- xtab2taf(tab8)
 catch.est <- xtab2taf(tab7)
 fatage <- xtab2taf(tab3)
@@ -98,7 +98,7 @@ multiplier <- xtab2taf(tab4)
 natage <- xtab2taf(tab2)
 summary <- xtab2taf(tab1)
 
-## Write tables to output directory
+# Write tables to output directory
 write.taf(catage.fit, dir="output")
 write.taf(catch.est, dir="output")
 write.taf(fatage, dir="output")

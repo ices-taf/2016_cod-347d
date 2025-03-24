@@ -3,15 +3,15 @@
 # Anders Nielsen <anders@nielsensweb.org> Jul. 2012
 
 
-## readLines<-function (con = stdin(), n = -1L, ok = TRUE, warn = FALSE, encoding = "unknown") 
-## {
-##     # Small change in realLines defaults  
-##     if (is.character(con)) {
-##         con <- file(con, "r")
-##         on.exit(close(con))
-##     }
-##     .Internal(readLines(con, n, ok, warn, encoding))
-## }
+# readLines<-function (con = stdin(), n = -1L, ok = TRUE, warn = FALSE, encoding = "unknown") 
+# {
+#     # Small change in realLines defaults  
+#     if (is.character(con)) {
+#         con <- file(con, "r")
+#         on.exit(close(con))
+#     }
+#     .Internal(readLines(con, n, ok, warn, encoding))
+# }
 
 read.table.nowarn<-function(...){
   tryCatch.W.E <- function(expr)
@@ -58,9 +58,9 @@ read.ices<-function(filen, testonly=FALSE){
   # 
   # Returns: A validated data matrix.
   
-  ## if(!file.exists(filen)){
-  ##   stop(paste("File",filen, "does not exsist"))
-  ## }
+  # if(!file.exists(filen)){
+  #   stop(paste("File",filen, "does not exsist"))
+  # }
   
   head<-scan(filen, skip=2, n=5, quiet=TRUE)
   minY<-head[1]
@@ -150,9 +150,9 @@ read.ices<-function(filen, testonly=FALSE){
 read.surveys<-function(filen){
   # Function to read ices survey file 
 
-  ## if(!file.exists(filen)){
-  ##   stop(paste("File",filen, "does not exsist"))
-  ## }
+  # if(!file.exists(filen)){
+  #   stop(paste("File",filen, "does not exsist"))
+  # }
 
   lin<-readLines(filen,warn=FALSE)[-c(1:2)]
   empty<-which(lapply(lapply(strsplit(lin, split='[[:space:]]+'), 
@@ -508,12 +508,12 @@ write.records<-function(fleets=NULL, surveys=NULL, residual.fleet=NULL,
   attr(dat,'time')<-time
   dat<-dat[o,]
   newyear<-min(as.numeric(dat$year)):max(as.numeric(dat$year))
-  idx1<-sapply(newyear, function(y){idx<-which(as.numeric(dat$year)==y);ifelse(length(idx)==0,-1,min(idx))}) ###which(!duplicated(dat$year))
-  idx2<-sapply(newyear, function(y){idx<-which(as.numeric(dat$year)==y);ifelse(length(idx)==0,-1,max(idx))}) ###c(idx1[-1]-1,nrow(dat))
+  idx1<-sapply(newyear, function(y){idx<-which(as.numeric(dat$year)==y);ifelse(length(idx)==0,-1,min(idx))}) # which(!duplicated(dat$year))
+  idx2<-sapply(newyear, function(y){idx<-which(as.numeric(dat$year)==y);ifelse(length(idx)==0,-1,max(idx))}) # c(idx1[-1]-1,nrow(dat))
   attr(dat,'idx1')<-idx1
   attr(dat,'idx2')<-idx2
   attr(dat,'year')<-newyear
-  attr(dat,'nyear')<-max(as.numeric(dat$year))-min(as.numeric(dat$year))+1 ##length(unique(dat$year))
+  attr(dat,'nyear')<-max(as.numeric(dat$year))-min(as.numeric(dat$year))+1 # length(unique(dat$year))
   cutY<-function(x)x[rownames(x)%in%newyear,]
   attr(dat,'prop.mature')<-cutY(prop.mature)
   attr(dat,'stock.mean.weight')<-cutY(stock.mean.weight)

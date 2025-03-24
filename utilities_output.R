@@ -203,14 +203,14 @@ dummyplot<-function(text='This plot is intentionally left blank'){
   text(.5,.5,labels=text)
 }
 
-## readLines<-function (con = stdin(), n = -1L, ok = TRUE, warn = FALSE, encoding = "unknown") 
-## {
-##     if (is.character(con)) {
-##         con <- file(con, "r")
-##         on.exit(close(con))
-##     }
-##     .Internal(readLines(con, n, ok, warn, encoding))
-## }
+# readLines<-function (con = stdin(), n = -1L, ok = TRUE, warn = FALSE, encoding = "unknown") 
+# {
+#     if (is.character(con)) {
+#         con <- file(con, "r")
+#         on.exit(close(con))
+#     }
+#     .Internal(readLines(con, n, ok, warn, encoding))
+# }
 
 stampit<-function() {
   x<-system('svn info', intern=TRUE)
@@ -218,7 +218,7 @@ stampit<-function() {
   udir<-sub('user[[:digit:]]+/','',udir)
   udir<-sub('/res','',udir)
   txt<-paste("stockassessment.org",udir,sub("Revision: ", "r",x[grep("Revision",x)]), sep=', ')
-  ## Function modified from Frank Harrell's Hmisc library 
+  # Function modified from Frank Harrell's Hmisc library 
   stamp <- function(string = "", print = TRUE, plot = TRUE) {
     opar <- par(yaxt = "s", xaxt = "s", xpd = NA)
     on.exit(par(opar))
