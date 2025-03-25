@@ -1,4 +1,4 @@
-# Preprocess data, write TAF data tables
+# Prepare data, write CSV data tables
 
 # Before: cn.dat, cw.dat, dw.dat, lf.dat, lw.dat, mo_raw.dat, nm.dat, pf.dat,
 #         pm.dat, survey.dat, sw.dat (boot/data)

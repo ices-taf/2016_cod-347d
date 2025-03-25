@@ -1,4 +1,4 @@
-# Prepare tables for report
+# Produce tables for report
 
 # Before: catage_full.csv, catch_sop.csv, datage_full.csv, ibts1.csv,
 #         ibts3.csv, latage_full.csv, maturity.csv, natmort.csv,

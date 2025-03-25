@@ -1,4 +1,4 @@
-# Extract results of interest, write TAF output tables
+# Extract results of interest, write CSV output tables
 
 # Before: confclone.log, model.cfg, sam.cor, sam.par, sam.rep, sam.res (model)
 # After:  catage_fit.csv, catch_est.csv, fatage.csv, multiplier.csv,
